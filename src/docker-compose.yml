@@ -1,7 +1,7 @@
 name: manta-ray-plan
 services:
   api-web:
-    image: manta-ray-plan/api-web
+    image: ghcr.io/madworldnl/mantarayplan-api-web:latest
     container_name: api-web
     profiles: [ all ]
     build:
