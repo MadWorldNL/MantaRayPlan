@@ -1,0 +1,17 @@
+<Project>
+    <PropertyGroup>
+        <Company>Mad-World.nl</Company>
+        <Copyright>Copyright (c) Mad-World.nl 2024</Copyright>
+        <Authors>Oscar Veldman</Authors>
+        <Product>MantaRayPlan</Product>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RootNamespace>MadWorldNL.MantaRayPlan</RootNamespace>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <ImplicitUsings>true</ImplicitUsings>
+        <Deterministic>true</Deterministic>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+</Project>
