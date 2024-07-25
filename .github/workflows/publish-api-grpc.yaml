@@ -1,4 +1,4 @@
-name: Create and publish an api web Docker image
+name: Create and publish an api grpc Docker image
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-api-web
+  IMAGE_NAME: ${{ github.repository }}-api-grpc
   PLATFORM_BUILDS: linux/amd64,linux/arm64
 
 jobs:
@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./src
-          file: ./src/Server.Controllers.Api.Web/Dockerfile
+          file: ./src/Server.Controllers.Api.Grpc/Dockerfile
           push: true
           platforms: ${{ env.PLATFORM_BUILDS }}
           tags: ${{ steps.meta.outputs.tags }}

@@ -37,8 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D9C36E6D-BB01-4A65-8727-C12A7DEE861C}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\publish-api-web.yaml = ..\.github\workflows\publish-api-web.yaml
 		..\.github\workflows\sonarqube.yaml = ..\.github\workflows\sonarqube.yaml
+		..\.github\workflows\publish-api-grpc.yaml = ..\.github\workflows\publish-api-grpc.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Grpc", "Server.Controllers.Api.Grpc\Api.Grpc.csproj", "{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}"
