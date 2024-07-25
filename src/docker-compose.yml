@@ -1,12 +1,12 @@
 name: manta-ray-plan
 services:
-  api-web:
-    image: ghcr.io/madworldnl/mantarayplan-api-web:latest
-    container_name: api-web
+  api-grpc:
+    image: ghcr.io/madworldnl/mantarayplan-api-grpc:latest
+    container_name: api-grpc
     profiles: [ all ]
     build:
       context: .
-      dockerfile: Server.Controllers.Api.Web/Dockerfile
+      dockerfile: Server.Controllers.Api.Grpc/Dockerfile
     ports:
       - "8080:8080"
       - "8081:8081"
