@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		..\.github\workflows\publish-api-grpc.yaml = ..\.github\workflows\publish-api-grpc.yaml
 		..\.github\workflows\publish-viewer-bff.yaml = ..\.github\workflows\publish-viewer-bff.yaml
 		..\.github\workflows\publish-viewer-web.yaml = ..\.github\workflows\publish-viewer-web.yaml
+		..\.github\workflows\publish-admin-bff.yaml = ..\.github\workflows\publish-admin-bff.yaml
+		..\.github\workflows\publish-admin-web.yaml = ..\.github\workflows\publish-admin-web.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Grpc", "Server.Controllers.Api.Grpc\Api.Grpc.csproj", "{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}"
@@ -49,11 +51,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{AD870EB2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Viewer", "Viewer", "{BBAAA2F8-0C03-4EAF-B64F-B326EB7E72B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bff", "Clients.Viewer.Bff\Bff.csproj", "{59B07BAE-0FBE-4A9A-B0BF-C9FBF81B4245}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer.Bff", "Clients.Viewer.Bff\Viewer.Bff.csproj", "{59B07BAE-0FBE-4A9A-B0BF-C9FBF81B4245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile", "Clients.Viewer.Mobile\Mobile.csproj", "{0CE845E9-D089-4018-B12B-11D5E310E962}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer.Mobile", "Clients.Viewer.Mobile\Viewer.Mobile.csproj", "{0CE845E9-D089-4018-B12B-11D5E310E962}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Clients.Viewer.Web\Web.csproj", "{BF83B416-F1EB-48CB-8A80-347FB229C2FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer.Web", "Clients.Viewer.Web\Viewer.Web.csproj", "{BF83B416-F1EB-48CB-8A80-347FB229C2FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.Bff", "Clients.Admin.Bff\Admin.Bff.csproj", "{B2A225CB-511D-4037-A999-06BDB5682FB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.Web", "Clients.Admin.Web\Admin.Web.csproj", "{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +84,8 @@ Global
 		{59B07BAE-0FBE-4A9A-B0BF-C9FBF81B4245} = {BBAAA2F8-0C03-4EAF-B64F-B326EB7E72B4}
 		{0CE845E9-D089-4018-B12B-11D5E310E962} = {BBAAA2F8-0C03-4EAF-B64F-B326EB7E72B4}
 		{BF83B416-F1EB-48CB-8A80-347FB229C2FD} = {BBAAA2F8-0C03-4EAF-B64F-B326EB7E72B4}
+		{B2A225CB-511D-4037-A999-06BDB5682FB4} = {AD870EB2-89A9-471C-A5CB-C95FA4D917BC}
+		{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE} = {AD870EB2-89A9-471C-A5CB-C95FA4D917BC}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -96,5 +104,13 @@ Global
 		{BF83B416-F1EB-48CB-8A80-347FB229C2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF83B416-F1EB-48CB-8A80-347FB229C2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF83B416-F1EB-48CB-8A80-347FB229C2FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A225CB-511D-4037-A999-06BDB5682FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A225CB-511D-4037-A999-06BDB5682FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A225CB-511D-4037-A999-06BDB5682FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A225CB-511D-4037-A999-06BDB5682FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

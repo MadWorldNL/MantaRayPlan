@@ -1,5 +1,25 @@
 name: manta-ray-plan
 services:
+  admin-bff:
+    image: ghcr.io/madworldnl/mantarayplan-admin-bff:latest
+    container_name: admin-bff
+    profiles: [ all ]
+    build:
+      context: .
+      dockerfile: Clients.Admin.Bff/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+  admin-web:
+    image: ghcr.io/madworldnl/mantarayplan-admin-web:latest
+    container_name: admin-web
+    profiles: [ all ]
+    build:
+      context: .
+      dockerfile: Clients.Admin.Web/Dockerfile
+    ports:
+      - "8082:80"
+      - "8083:443"
   api-grpc:
     image: ghcr.io/madworldnl/mantarayplan-api-grpc:latest
     container_name: api-grpc
@@ -8,8 +28,8 @@ services:
       context: .
       dockerfile: Server.Controllers.Api.Grpc/Dockerfile
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "8084:8080"
+      - "8085:8081"
   viewer-bff:
     image: ghcr.io/madworldnl/mantarayplan-viewer-bff:latest
     container_name: viewer-bff
@@ -18,8 +38,8 @@ services:
       context: .
       dockerfile: Clients.Viewer.Bff/Dockerfile
     ports:
-      - "8082:8080"
-      - "8083:8081"
+      - "8086:8080"
+      - "8087:8081"
   viewer-web:
     image: ghcr.io/madworldnl/mantarayplan-viewer-web:latest
     container_name: viewer-web
@@ -28,5 +48,5 @@ services:
       context: .
       dockerfile: Clients.Viewer.Web/Dockerfile
     ports:
-      - "8084:80"
-      - "8085:443"
+      - "8088:80"
+      - "8089:443"

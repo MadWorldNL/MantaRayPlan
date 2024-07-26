@@ -11,15 +11,15 @@ COPY ["Directory.Build.props", "/"]
 COPY ["Directory.Packages.props", "/"]
 COPY ["Nuget.Config", "/"]
 
-COPY ["Clients.Viewer.Web/Viewer.Web.csproj", "Clients.Viewer.Web/"]
+COPY ["Clients.Admin.Web/Admin.Web.csproj", "Clients.Admin.Web/"]
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet restore "Clients.Viewer.Web/Viewer.Web.csproj"
+RUN dotnet restore "Clients.Admin.Web/Admin.Web.csproj"
 COPY . .
-WORKDIR "/src/Clients.Viewer.Web"
-RUN dotnet build "Viewer.Web.csproj" -c "$BUILD_CONFIGURATION" -o /app/build
+WORKDIR "/src/Clients.Admin.Web"
+RUN dotnet build "Admin.Web.csproj" -c "$BUILD_CONFIGURATION" -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Viewer.Web.csproj" -c "$BUILD_CONFIGURATION" -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Admin.Web.csproj" -c "$BUILD_CONFIGURATION" -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 COPY --from=publish /app/publish/wwwroot /usr/share/nginx/html
