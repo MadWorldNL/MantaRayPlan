@@ -8,13 +8,37 @@
 *TODO*
 
 ## Getting Started
-*TODO*
-
 ### Prerequisites
-*TODO*
+Download the following software
+* Docker 
+* .NET 8 SDK
 
 ### Installation
-*TODO*
+Installation guide for your development environment
+#### Option 1: From Docker
+* Clone this repository
+* Run this command in the src folder:
+```shell
+docker compose --profile all up
+```
+
+#### Option 2: From your editor
+* Clone this repository
+* Run this command in the src folder:
+```shell
+sudo dotnet workload restore
+docker compose up
+```
+* Set this projects as startup:
+    * Admin.Bff
+    * Admin.Web
+    * Viewer.Bff
+    * Viewer.Mobile
+    * Viewer.Web
+    * Api.Grpc *
+* Press run
+
+*This project is required to set as startup project
 
 ### Running the tests
 *TODO*
