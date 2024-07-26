@@ -1,0 +1,6 @@
+@Clients.Mobile.Bff_HostAddress = http://localhost:5086
+
+GET {{Clients.Mobile.Bff_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
