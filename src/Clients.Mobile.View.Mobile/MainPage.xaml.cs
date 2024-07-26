@@ -1,4 +1,4 @@
-﻿namespace MadWorldNL.MantaRayPlan;
+﻿namespace MadWorldNL.MantaRayPlan.Mobile;
 
 public partial class MainPage : ContentPage
 {

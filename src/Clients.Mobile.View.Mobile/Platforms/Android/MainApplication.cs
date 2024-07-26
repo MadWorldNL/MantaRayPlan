@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Clients.Mobile.View;
+namespace MadWorldNL.MantaRayPlan.Mobile;
 
 [Application]
 public class MainApplication : MauiApplication

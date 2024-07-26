@@ -7,7 +7,6 @@
     </PropertyGroup>
     <PropertyGroup>
         <RootNamespace>MadWorldNL.MantaRayPlan</RootNamespace>
-        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
         <ImplicitUsings>true</ImplicitUsings>

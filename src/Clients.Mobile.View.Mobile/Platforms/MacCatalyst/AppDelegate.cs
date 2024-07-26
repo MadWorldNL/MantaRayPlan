@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Clients.Mobile.View;
+namespace MadWorldNL.MantaRayPlan.Mobile;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

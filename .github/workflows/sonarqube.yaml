@@ -44,6 +44,7 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"MadWorldNL_MantaRayPlan" /o:"madworldnl" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs"
+          dotnet workload restore ./src/MadWorldNL.MantaRayPlan.sln; 
           dotnet restore ./src/MadWorldNL.MantaRayPlan.sln; 
           dotnet build ./src/MadWorldNL.MantaRayPlan.sln --no-restore -c Release;
           dotnet test ./src/MadWorldNL.MantaRayPlan.sln --no-build --no-restore -c Release --blame-hang-timeout 5min --collect:"XPlat Code Coverage" --results-directory TestResults/ -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover;

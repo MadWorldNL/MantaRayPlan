@@ -2,7 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 
-namespace Clients.Mobile.View;
+namespace MadWorldNL.MantaRayPlan.Mobile;
 
 [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true,
     ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode |

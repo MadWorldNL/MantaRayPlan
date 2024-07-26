@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace Clients.Mobile.View;
+namespace MadWorldNL.MantaRayPlan.Mobile;
 
 class Program : MauiApplication
 {

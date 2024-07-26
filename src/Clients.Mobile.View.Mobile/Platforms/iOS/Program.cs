@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Clients.Mobile.View;
+namespace MadWorldNL.MantaRayPlan.Mobile;
 
 public class Program
 {
