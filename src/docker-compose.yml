@@ -10,3 +10,23 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
+  viewer-bff:
+    image: ghcr.io/madworldnl/mantarayplan-viewer-bff:latest
+    container_name: viewer-bff
+    profiles: [ all ]
+    build:
+      context: .
+      dockerfile: Clients.Viewer.Bff/Dockerfile
+    ports:
+      - "8082:8080"
+      - "8083:8081"
+  viewer-web:
+    image: ghcr.io/madworldnl/mantarayplan-viewer-web:latest
+    container_name: viewer-web
+    profiles: [ all ]
+    build:
+      context: .
+      dockerfile: Clients.Viewer.Web/Dockerfile
+    ports:
+      - "8084:80"
+      - "8085:443"

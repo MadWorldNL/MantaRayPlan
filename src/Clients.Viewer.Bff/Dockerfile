@@ -14,17 +14,17 @@ COPY Directory.Build.props .
 COPY Directory.Packages.props .
 COPY Nuget.Config .
 
-COPY ["Server.Controllers.Api.Grpc/Api.Grpc.csproj", "Server.Controllers.Api.Grpc/"]
-RUN dotnet restore "Server.Controllers.Api.Grpc/Api.Grpc.csproj"
+COPY ["Clients.Viewer.Bff/Bff.csproj", "Clients.Viewer.Bff/"]
+RUN dotnet restore "Clients.Viewer.Bff/Bff.csproj"
 COPY . .
-WORKDIR "/src/Server.Controllers.Api.Grpc"
-RUN dotnet build "Api.Grpc.csproj" -c "$BUILD_CONFIGURATION" -o /app/build
+WORKDIR "/src/Clients.Viewer.Bff"
+RUN dotnet build "Bff.csproj" -c "$BUILD_CONFIGURATION" -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Api.Grpc.csproj" -c "$BUILD_CONFIGURATION" -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Bff.csproj" -c "$BUILD_CONFIGURATION" -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MadWorldNL.MantaRayPlan.Api.Grpc.dll"]
+ENTRYPOINT ["dotnet", "MadWorldNL.MantaRayPlan.Viewer.Bff.dll"]
