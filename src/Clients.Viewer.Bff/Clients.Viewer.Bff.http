@@ -1,0 +1,6 @@
+@Clients.Viewer.Bff_HostAddress = http://localhost:5193
+
+GET {{Clients.Viewer.Bff_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
