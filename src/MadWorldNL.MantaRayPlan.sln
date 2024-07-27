@@ -6,7 +6,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-files", "solution-
 		..\README.md = ..\README.md
 		..\CODE_OF_CONDUCT.md = ..\CODE_OF_CONDUCT.md
 		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
-		..\docs\version.md = ..\docs\version.md
 		..\LICENSE = ..\LICENSE
 		..\SECURITY.md = ..\SECURITY.md
 	EndProjectSection
@@ -77,6 +76,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "code", "code", "{941D883C-3
 		Nuget.Config = Nuget.Config
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D7968674-C415-4231-B919-69E19305BAD2}"
+	ProjectSection(SolutionItems) = preProject
+		..\docs\version.md = ..\docs\version.md
+		..\docs\kubernetes.md = ..\docs\kubernetes.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +109,7 @@ Global
 		{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE} = {AD870EB2-89A9-471C-A5CB-C95FA4D917BC}
 		{979A570E-B1D8-4DF6-9368-4F11087B9349} = {E6AB1870-91FA-415F-B091-0E5793AC961A}
 		{941D883C-384C-427B-9266-CC0719AEFFDB} = {E6AB1870-91FA-415F-B091-0E5793AC961A}
+		{D7968674-C415-4231-B919-69E19305BAD2} = {E6AB1870-91FA-415F-B091-0E5793AC961A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
