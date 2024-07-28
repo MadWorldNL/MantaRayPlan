@@ -10,6 +10,8 @@ clusterIssuer:
 
 certification:
   email: "oveldman@gmail.com"
+  commonDomain: "www.mad-world.nl"
+  country: "NL"
 
 ingress:
   name: "ingress"

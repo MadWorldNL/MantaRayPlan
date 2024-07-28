@@ -1,5 +1,8 @@
 namespace: "manta-ray-plan-production"
 
+clusterIssuer:
+  enabled: true
+
 admin:
   bff:
     host: admin-bff-mantarayplan.mad-world.nl
