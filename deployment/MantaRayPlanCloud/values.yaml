@@ -4,9 +4,7 @@ image:
   tag: "v0.2.0"
 
 clusterIssuer:
-  commonDomain: "www.mad-world.nl"
   enabled: false
-  country: "NL"
 
 certification:
   email: "oveldman@gmail.com"
