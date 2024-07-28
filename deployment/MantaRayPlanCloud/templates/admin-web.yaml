@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.admin.web.deployment }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.admin.web.app }}
+    name: {{ .Values.admin.web.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.admin.web.app }}
+      task: {{ .Values.admin.web.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.admin.web.app }}
+        task: {{ .Values.admin.web.name }}
+    spec:
+      containers:
+        - name: {{ .Values.admin.web.app }}
+          image: "{{ .Values.admin.web.image }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.admin.web.loadBalancer }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: {{ .Values.admin.web.app }}
+    task: {{ .Values.admin.web.name }}
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.api.grpc.deployment }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.api.grpc.app }}
+    name: {{ .Values.api.grpc.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.api.grpc.app }}
+      task: {{ .Values.api.grpc.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.api.grpc.app }}
+        task: {{ .Values.api.grpc.name }}
+    spec:
+      containers:
+        - name: {{ .Values.api.grpc.app }}
+          image: "{{ .Values.api.grpc.image }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.api.grpc.loadBalancer }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: {{ .Values.api.grpc.app }}
+    task: {{ .Values.api.grpc.name }}
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer

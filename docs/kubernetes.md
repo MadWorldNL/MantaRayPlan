@@ -23,4 +23,21 @@ Helm is a package manager for Kubernetes, which helps in defining, installing, a
 [See Install Guide](https://helm.sh/docs/intro/install/)
 
 ## Usage on local machine
-*Todo*
+### Create new helm chart
+The `helm create` command generates a new Helm chart with a predefined directory structure and template files, facilitating the development of Kubernetes applications.
+```shell
+helm create Cloud
+```
+
+### Deploy to minikube
+```shell
+minikube start
+minikube stop
+minikube addons enable metrics-server
+minikube addons enable ingress
+minikube dashboard
+minikube tunnel
+helm install -f environments/values-development.yaml manta-ray-plan-cloud .
+helm upgrade -f environments/values-development.yaml manta-ray-plan-cloud .
+helm uninstall manta-ray-plan-cloud
+```

@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  rules:
+    - host: {{ .Values.admin.bff.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.admin.bff.loadBalancer }}
+                port:
+                  number: 8080
+    - host: {{ .Values.admin.web.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.admin.web.loadBalancer }}
+                port:
+                  number: 80
+    - host: {{ .Values.viewer.bff.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.viewer.bff.loadBalancer }}
+                port:
+                  number: 8080
+    - host: {{ .Values.viewer.web.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.viewer.web.loadBalancer }}
+                port:
+                  number: 80
