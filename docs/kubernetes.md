@@ -26,18 +26,44 @@ Helm is a package manager for Kubernetes, which helps in defining, installing, a
 ### Create new helm chart
 The `helm create` command generates a new Helm chart with a predefined directory structure and template files, facilitating the development of Kubernetes applications.
 ```shell
-helm create Cloud
+helm create MantaRayPlanCloud
+```
+
+### Prepare minikube
+First, start Minikube:
+```shell
+minikube start
+```
+
+The following addons are required:
+```shell
+minikube addons enable metrics-server
+minikube addons enable ingress
+```
+
+Convenient tools for debugging Kubernetes:
+```shell
+minikube dashboard
+minikube tunnel
+```
+
+When you stop development for the day:
+```shell
+minikube stop
 ```
 
 ### Deploy to minikube
+Install the cluster for the first time:
 ```shell
-minikube start
-minikube stop
-minikube addons enable metrics-server
-minikube addons enable ingress
-minikube dashboard
-minikube tunnel
 helm install -f environments/values-development.yaml manta-ray-plan-cloud .
+```
+
+Upgrade the cluster when you have a new version:
+```shell
 helm upgrade -f environments/values-development.yaml manta-ray-plan-cloud .
+```
+
+Remove the cluster from Kubernetes:
+```shell
 helm uninstall manta-ray-plan-cloud
 ```
