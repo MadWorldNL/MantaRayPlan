@@ -3,7 +3,22 @@ kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
   namespace: {{ .Values.namespace }}
+  annotations:
+    cert-manager.io/cluster-issuer: "lets-encrypt"
+    cert-manager.io/common-name: {{ .Values.certification.commonDomain }}
+    cert-manager.io/subject-countries: {{ .Values.certification.country }}
+    cert-manager.io/email-sans: {{ .Values.certification.email }}
+    kubernetes.io/ingress.class: "public"
 spec:
+{{- if .Values.clusterIssuer.enabled }}
+  tls:
+    - hosts:
+        - {{ .Values.admin.bff.host }}
+        - {{ .Values.admin.web.host }}
+        - {{ .Values.viewer.bff.host }}
+        - {{ .Values.viewer.web.host }}
+      secretName: madworld-tls
+{{ end }}
   rules:
     - host: {{ .Values.admin.bff.host }}
       http:
