@@ -30,8 +30,6 @@ Now your can connect through vpn in your server.
 By default the firewall is already installed. Open these ports in the firewall:
 
 ```shell
-sudo ufw deny 22   # SSH
-# Still need to found the solution
 sudo ufw allow from 10.8.0.0/24 to any port 22 # SSH
 sudo ufw allow 80   # HTTP
 sudo ufw allow 443  # HTTPS
@@ -48,4 +46,11 @@ Show added ports:
 sudo ufw show added
 ```
 
+Connect with ssh over the IP of the VPN by:
+Show added ports:
+```shell
+ssh username@10.8.0.1
+```
+
 ### Install kubernetes
+[See Install Guide](kubernetes.md)
