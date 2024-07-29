@@ -80,6 +80,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D7968674-C
 	ProjectSection(SolutionItems) = preProject
 		..\docs\version.md = ..\docs\version.md
 		..\docs\kubernetes.md = ..\docs\kubernetes.md
+		..\docs\dns.md = ..\docs\dns.md
+		..\docs\server.md = ..\docs\server.md
 	EndProjectSection
 EndProject
 Global

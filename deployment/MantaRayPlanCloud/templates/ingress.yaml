@@ -13,6 +13,7 @@ spec:
 {{- if .Values.clusterIssuer.enabled }}
   tls:
     - hosts:
+        - {{ .Values.domain.default }}
         - {{ .Values.admin.bff.host }}
         - {{ .Values.admin.web.host }}
         - {{ .Values.viewer.bff.host }}
@@ -50,6 +51,16 @@ spec:
                 name: {{ .Values.viewer.bff.loadBalancer }}
                 port:
                   number: 8080
+    - host: {{ .Values.domain.default }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.viewer.web.loadBalancer }}
+                port:
+                  number: 80
     - host: {{ .Values.viewer.web.host }}
       http:
         paths:

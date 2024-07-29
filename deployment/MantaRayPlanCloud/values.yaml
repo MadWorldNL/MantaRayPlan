@@ -11,6 +11,9 @@ certification:
   commonDomain: "www.mad-world.nl"
   country: "NL"
 
+domain:
+  default: "www.mantarayplan.localhost"
+
 ingress:
   name: "ingress"
 

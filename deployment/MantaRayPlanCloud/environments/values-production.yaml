@@ -3,18 +3,21 @@ namespace: "manta-ray-plan-production"
 clusterIssuer:
   enabled: true
 
+domain:
+  default: "www.mad-world.nl"
+
 admin:
   bff:
-    host: admin-bff-mantarayplan.mad-world.nl
+    host: "admin-bff-mantarayplan.mad-world.nl"
 
 admin:
   web:
-    host: admin-mantarayplan.mad-world.nl
+    host: "admin-mantarayplan.mad-world.nl"
 
 viewer:
   bff:
-    host: viewer-bff-mantarayplan.mad-world.nl
+    host: "viewer-bff-mantarayplan.mad-world.nl"
 
 viewer:
   web:
-    host: mantarayplan.mad-world.nl
+    host: "mantarayplan.mad-world.nl"
