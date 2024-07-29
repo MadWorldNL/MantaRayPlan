@@ -9,15 +9,11 @@ domain:
 admin:
   bff:
     host: "admin-bff-mantarayplan.mad-world.nl"
-
-admin:
   web:
     host: "admin-mantarayplan.mad-world.nl"
 
 viewer:
   bff:
     host: "viewer-bff-mantarayplan.mad-world.nl"
-
-viewer:
   web:
     host: "mantarayplan.mad-world.nl"
