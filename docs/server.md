@@ -53,4 +53,4 @@ ssh username@10.8.0.1
 ```
 
 ### Install kubernetes
-[See Install Guide](kubernetes.md)
+[See Install Guide](kubernetes.md#install-on-production)

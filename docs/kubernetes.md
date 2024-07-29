@@ -10,7 +10,6 @@ Before installing Kubernetes on your local machine, ensure you have the followin
 
 ## Install on local machine
 ### Step 1: Install Kubectl
-
 kubectl is the command-line tool for interacting with the Kubernetes cluster.
 [See Install Guide](https://kubernetes.io/docs/tasks/tools/)
 
@@ -68,7 +67,42 @@ Remove the cluster from Kubernetes:
 helm uninstall manta-ray-plan-cloud
 ```
 ## Install on production
-*TODO*
+### Step 1: Install MicroK8s
+Execute this install command:
+```shell
+sudo snap install microk8s --classic
+sudo microk8s status --wait-ready
+```
+
+### Step 2: Enable services
+Required:
+```shell
+sudo microk8s enable dns
+sudo microk8s enable helm
+sudo microk8s enable dashboard
+sudo microk8s enable ingress
+sudo microk8s enable cert-manager
+```
+
+Optional:
+```shell
+sudo microk8s enable metrics-server
+sudo microk8s enable prometheus
+```
 
 ## Usage on production
-*TODO*
+### Step 1 - Download source code
+```shell
+git clone https://github.com/MadWorldNL/MantaRayPlan
+```
+
+### Step 2 - Install Cluster
+Navigate to the folder `deployment/MantaRayPlanCloud` and execute this command:
+```shell
+microk8s helm install -f environments/values-production.yaml manta-ray-plan-cloud .
+```
+
+See [Deploy to minikube](#deploy-to-minikube) for other helm reference
+
+## Reference
+[MicroK8s install guide](https://microk8s.io/)
