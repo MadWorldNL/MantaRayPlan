@@ -1,4 +1,16 @@
 apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: mad-world-ingress-class
+spec:
+  controller: mad-world.nl/ingress-controller
+  parameters:
+    apiGroup: k8s.mad-world.nl
+    kind: IngressParameters
+    name: mad-world
+---
+
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
@@ -8,9 +20,9 @@ metadata:
     cert-manager.io/common-name: {{ .Values.certification.commonDomain }}
     cert-manager.io/subject-countries: {{ .Values.certification.country }}
     cert-manager.io/email-sans: {{ .Values.certification.email }}
-    kubernetes.io/ingress.class: "public"
 spec:
 {{- if .Values.clusterIssuer.enabled }}
+  ingressClassName: mad-world-ingress-class
   tls:
     - hosts:
         - {{ .Values.domain.default }}
