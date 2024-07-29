@@ -1,0 +1,58 @@
+namespace: "manta-ray-plan"
+
+image:
+  tag: "v0.3.0"
+
+clusterIssuer:
+  enabled: false
+
+certification:
+  email: "oveldman@gmail.com"
+  commonDomain: "www.mad-world.nl"
+  country: "NL"
+
+domain:
+  default: "www.mantarayplan.localhost"
+
+ingress:
+  name: "ingress"
+
+api:
+  grpc:
+    deployment: "api-grpc-deployment"
+    app: "api-grpc"
+    name: "api-grpc"
+    loadBalancer: "api-grpc-loadbalancer"
+    image: "ghcr.io/madworldnl/mantarayplan-api-grpc"
+
+admin:
+  bff:
+    deployment: "admin-bff-deployment"
+    app: "admin-bff"
+    name: "admin-bff"
+    loadBalancer: "admin-bff-loadbalancer"
+    image: "ghcr.io/madworldnl/mantarayplan-admin-bff"
+    host: "admin-bff.mantarayplan.localhost"
+  web:
+    deployment: "admin-web-deployment"
+    app: "admin-web"
+    name: "admin-web"
+    loadBalancer: "admin-web-loadbalancer"
+    image: "ghcr.io/madworldnl/mantarayplan-admin-web"
+    host: "admin.mantarayplan.localhost"
+
+viewer:
+  bff:
+    deployment: "viewer-bff-deployment"
+    app: "viewer-bff"
+    name: "viewer-bff"
+    loadBalancer: "viewer-bff-loadbalancer"
+    image: "ghcr.io/madworldnl/mantarayplan-viewer-bff"
+    host: "viewer-bff.mantarayplan.localhost"
+  web:
+    deployment: "viewer-web-deployment"
+    app: "viewer-web"
+    name: "viewer-web"
+    loadBalancer: "viewer-web-loadbalancer"
+    image: "ghcr.io/madworldnl/mantarayplan-viewer-web"
+    host: "viewer.mantarayplan.localhost"

@@ -1,0 +1,73 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    cert-manager.io/cluster-issuer: "lets-encrypt"
+    cert-manager.io/common-name: {{ .Values.certification.commonDomain }}
+    cert-manager.io/subject-countries: {{ .Values.certification.country }}
+    cert-manager.io/email-sans: {{ .Values.certification.email }}
+spec:
+{{- if .Values.clusterIssuer.enabled }}
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.domain.default }}
+        - {{ .Values.admin.bff.host }}
+        - {{ .Values.admin.web.host }}
+        - {{ .Values.viewer.bff.host }}
+        - {{ .Values.viewer.web.host }}
+      secretName: madworld-tls
+{{ end }}
+  rules:
+    - host: {{ .Values.admin.bff.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.admin.bff.loadBalancer }}
+                port:
+                  number: 8080
+    - host: {{ .Values.admin.web.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.admin.web.loadBalancer }}
+                port:
+                  number: 80
+    - host: {{ .Values.viewer.bff.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.viewer.bff.loadBalancer }}
+                port:
+                  number: 8080
+    - host: {{ .Values.domain.default }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.viewer.web.loadBalancer }}
+                port:
+                  number: 80
+    - host: {{ .Values.viewer.web.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.viewer.web.loadBalancer }}
+                port:
+                  number: 80

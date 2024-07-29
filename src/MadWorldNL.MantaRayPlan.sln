@@ -4,11 +4,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-files", "solution-
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
 		..\README.md = ..\README.md
-		Nuget.Config = Nuget.Config
-		Directory.Build.props = Directory.Build.props
-		Directory.Packages.props = Directory.Packages.props
-		docker-compose.env = docker-compose.env
-		docker-compose.yml = docker-compose.yml
+		..\CODE_OF_CONDUCT.md = ..\CODE_OF_CONDUCT.md
+		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
+		..\LICENSE = ..\LICENSE
+		..\SECURITY.md = ..\SECURITY.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "automated-tests", "automated-tests", "{0F97374D-45DB-4F78-905D-07A96CA2057F}"
@@ -61,6 +60,30 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.Bff", "Clients.Admin.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.Web", "Clients.Admin.Web\Admin.Web.csproj", "{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{979A570E-B1D8-4DF6-9368-4F11087B9349}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\pull_request_template.md = ..\.github\pull_request_template.md
+		..\.github\ISSUE_TEMPLATE\bug_report.md = ..\.github\ISSUE_TEMPLATE\bug_report.md
+		..\.github\ISSUE_TEMPLATE\feature_request.md = ..\.github\ISSUE_TEMPLATE\feature_request.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "code", "code", "{941D883C-384C-427B-9266-CC0719AEFFDB}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		docker-compose.env = docker-compose.env
+		docker-compose.yml = docker-compose.yml
+		Nuget.Config = Nuget.Config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D7968674-C415-4231-B919-69E19305BAD2}"
+	ProjectSection(SolutionItems) = preProject
+		..\docs\version.md = ..\docs\version.md
+		..\docs\kubernetes.md = ..\docs\kubernetes.md
+		..\docs\dns.md = ..\docs\dns.md
+		..\docs\server.md = ..\docs\server.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +109,9 @@ Global
 		{BF83B416-F1EB-48CB-8A80-347FB229C2FD} = {BBAAA2F8-0C03-4EAF-B64F-B326EB7E72B4}
 		{B2A225CB-511D-4037-A999-06BDB5682FB4} = {AD870EB2-89A9-471C-A5CB-C95FA4D917BC}
 		{9F4EC5A6-0F34-4029-80E4-3F55CECB87DE} = {AD870EB2-89A9-471C-A5CB-C95FA4D917BC}
+		{979A570E-B1D8-4DF6-9368-4F11087B9349} = {E6AB1870-91FA-415F-B091-0E5793AC961A}
+		{941D883C-384C-427B-9266-CC0719AEFFDB} = {E6AB1870-91FA-415F-B091-0E5793AC961A}
+		{D7968674-C415-4231-B919-69E19305BAD2} = {E6AB1870-91FA-415F-B091-0E5793AC961A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

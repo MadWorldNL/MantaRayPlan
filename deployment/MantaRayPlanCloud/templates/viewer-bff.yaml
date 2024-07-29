@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.viewer.bff.deployment }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.viewer.bff.app }}
+    name: {{ .Values.viewer.bff.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.viewer.bff.app }}
+      task: {{ .Values.viewer.bff.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.viewer.bff.app }}
+        task: {{ .Values.viewer.bff.name }}
+    spec:
+      containers:
+        - name: {{ .Values.viewer.bff.app }}
+          image: "{{ .Values.viewer.bff.image }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.viewer.bff.loadBalancer }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: {{ .Values.viewer.bff.app }}
+    task: {{ .Values.viewer.bff.name }}
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
