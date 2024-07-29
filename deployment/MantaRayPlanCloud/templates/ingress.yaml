@@ -1,16 +1,4 @@
 apiVersion: networking.k8s.io/v1
-kind: IngressClass
-metadata:
-  name: mad-world-ingress-class
-spec:
-  controller: mad-world.nl/ingress-controller
-  parameters:
-    apiGroup: k8s.mad-world.nl
-    kind: IngressParameters
-    name: mad-world
----
-
-apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
@@ -22,7 +10,7 @@ metadata:
     cert-manager.io/email-sans: {{ .Values.certification.email }}
 spec:
 {{- if .Values.clusterIssuer.enabled }}
-  ingressClassName: mad-world-ingress-class
+  ingressClassName: nginx
   tls:
     - hosts:
         - {{ .Values.domain.default }}
