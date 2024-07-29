@@ -34,11 +34,17 @@ sudo ufw allow from 10.8.0.0/24 to any port 22 # SSH
 sudo ufw allow 80   # HTTP
 sudo ufw allow 443  # HTTPS
 sudo ufw allow 1194 # OpenVPN
+sudo ufw allow from 10.8.0.0/24 to any port 10443 # Kubernetes Dashboard
 ```
 
 Now enable the firewall:
 ```shell
 sudo ufw enable
+```
+
+Or reload when firewall is already enabled:
+```shell
+sudo ufw reload
 ```
 
 Show added ports:
