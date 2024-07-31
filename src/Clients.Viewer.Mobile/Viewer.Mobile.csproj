@@ -63,4 +63,8 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Clients.DefaultStyle\DefaultStyle.csproj" />
+    </ItemGroup>
+
 </Project>
