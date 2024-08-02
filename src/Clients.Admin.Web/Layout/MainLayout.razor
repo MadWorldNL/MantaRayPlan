@@ -10,8 +10,6 @@
         <!-- ! Main -->
         <main class="main users chart-page" id="skip-target">
             <div class="container">
-                <button @onclick="ToggleNavMenu">Click me</button>
-                
                 @Body
             </div>
         </main>
@@ -19,10 +17,3 @@
     </div>
 </div>
 
-@code
-{
-    private void ToggleNavMenu()
-    {
-        Console.WriteLine(Guid.NewGuid());
-    }
-}

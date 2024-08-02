@@ -3351,6 +3351,14 @@ label {
     color: #EFF0F6;
 }
 
+.darkmode h1 {
+    color: #EFF0F6;
+}
+
+.darkmode {
+    color: #EFF0F6;
+}
+
 .darkmode .stat-cards-item {
     background-color: #222235;
     -webkit-box-shadow: none;

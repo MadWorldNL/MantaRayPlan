@@ -1,28 +1,16 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="layer"></div>
-<!-- ! Body -->
 <a class="skip-link sr-only" href="#skip-target">Skip to content</a>
 <div class="page-flex">
     <SideBar/>
     <div class="main-wrapper">
         <TopBar />
-        <!-- ! Main -->
         <main class="main users chart-page" id="skip-target">
             <div class="container">
-                <button @onclick="ToggleNavMenu">Click me</button>
-                
                 @Body
             </div>
         </main>
         <Footer/>
     </div>
 </div>
-
-@code
-{
-    private void ToggleNavMenu()
-    {
-        Console.WriteLine(Guid.NewGuid());
-    }
-}
