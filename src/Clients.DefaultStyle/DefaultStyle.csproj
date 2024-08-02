@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <AssemblyName>MadWorldNL.MantaRayPlan.DefaultStyle</AssemblyName>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+        <PackageReference Include="Microsoft.Web.LibraryManager.Build" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="wwwroot\app\img\.DS_Store" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\app\js\script.js" />
+    </ItemGroup>
+
+</Project>

@@ -2,30 +2,34 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clients.Admin.Web</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MantaRayPlan</title>
     <base href="/" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="_content/MadWorldNL.MantaRayPlan.DefaultStyle/app/img/svg/logo.svg" type="image/x-icon">
+    <!-- Custom styles -->
     <link rel="stylesheet" href="css/app.css" />
-    <!-- If you add any scoped CSS files, uncomment the following to load them
-    <link href="Clients.Admin.Web.styles.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="_content/MadWorldNL.MantaRayPlan.DefaultStyle/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="_content/MadWorldNL.MantaRayPlan.DefaultStyle/app/css/style.css">
 </head>
 
-<body>
-    <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%" cx="50%" cy="50%" />
-            <circle r="40%" cx="50%" cy="50%" />
-        </svg>
-        <div class="loading-progress-text"></div>
-    </div>
+<body class="darkmode">
+<div id="app">
+    <svg class="loading-progress">
+        <circle r="40%" cx="50%" cy="50%" />
+        <circle r="40%" cx="50%" cy="50%" />
+    </svg>
+    <div class="loading-progress-text"></div>
+</div>
 
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
-    <script src="_framework/blazor.webassembly.js"></script>
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+<script src="_framework/blazor.webassembly.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,36 @@
 ﻿@inherits LayoutComponentBase
 
-@Body
+<div class="layer"></div>
+<!-- ! Body -->
+<a class="skip-link sr-only" href="#skip-target">Skip to content</a>
+<div class="page-flex">
+    <SideBar @ref="SideBar"/>
+    <div class="main-wrapper">
+        <TopBar @ref="TopBar" />
+        <!-- ! Main -->
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                @Body
+            </div>
+        </main>
+        <Footer/>
+    </div>
+</div>
+
+@code {
+    private SideBar SideBar = null!;
+    private TopBar TopBar = null!;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            TopBar.Set(SideBar);
+            SideBar.Set(TopBar);
+        }
+        
+        base.OnAfterRender(firstRender);
+    }
+
+}
+

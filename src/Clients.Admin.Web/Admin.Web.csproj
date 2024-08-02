@@ -18,4 +18,22 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Clients.DefaultStyle\DefaultStyle.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Layout\Footer.razor" />
+      <_ContentIncludedByDefault Remove="Layout\MainLayout.razor" />
+      <_ContentIncludedByDefault Remove="Layout\SideBar.razor" />
+      <_ContentIncludedByDefault Remove="Layout\TopBar.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Layout\Footer.razor" />
+      <AdditionalFiles Include="Layout\MainLayout.razor" />
+      <AdditionalFiles Include="Layout\SideBar.razor" />
+      <AdditionalFiles Include="Layout\TopBar.razor" />
+    </ItemGroup>
+
 </Project>
