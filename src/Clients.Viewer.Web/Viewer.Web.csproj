@@ -20,6 +20,14 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Clients.DefaultStyle\DefaultStyle.csproj" />
+      <ProjectReference Include="..\Clients.Viewer.Shared\Viewer.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Layout\Footer.razor" />
+      <_ContentIncludedByDefault Remove="Layout\MainLayout.razor" />
+      <_ContentIncludedByDefault Remove="Layout\SideBar.razor" />
+      <_ContentIncludedByDefault Remove="Layout\TopBar.razor" />
     </ItemGroup>
 
 </Project>

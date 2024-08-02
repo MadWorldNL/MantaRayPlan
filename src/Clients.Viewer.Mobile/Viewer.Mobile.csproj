@@ -65,6 +65,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Clients.DefaultStyle\DefaultStyle.csproj" />
+      <ProjectReference Include="..\Clients.Viewer.Shared\Viewer.Shared.csproj" />
     </ItemGroup>
 
 </Project>
