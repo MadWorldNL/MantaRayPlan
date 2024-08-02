@@ -45,3 +45,9 @@ docker compose up
 
 ## Documentation
 *TODO*
+
+## Acknowledgements
+I would like to thank the following sources and individuals for their templates, which I used in this application:
+- [Bootstrap 5 theme - Elegant](https://themewagon.com/themes/free-bootstrap-5-html-5-admin-dashboard-website-template-elegant/) - Made by: Freebibuges
+
+Your work has been incredibly helpful, and I greatly appreciate your contributions and generosity in sharing these resources.
