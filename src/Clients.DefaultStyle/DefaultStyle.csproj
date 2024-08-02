@@ -14,4 +14,8 @@
         <PackageReference Include="Microsoft.Web.LibraryManager.Build" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="wwwroot\app\img\.DS_Store" />
+    </ItemGroup>
+
 </Project>
