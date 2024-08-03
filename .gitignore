@@ -400,4 +400,4 @@ FodyWeavers.xsd
 .idea/
 
 # MantaRayPlan
-wwwroot/lib/
+**/wwwroot/lib
