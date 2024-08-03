@@ -2,6 +2,10 @@
 
 var builder = WebApplication.CreateBuilder();
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
+
+app.MapHealthChecks("/healthz");
 
 await app.RunAsync();

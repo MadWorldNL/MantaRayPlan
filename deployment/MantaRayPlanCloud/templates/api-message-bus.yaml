@@ -22,5 +22,13 @@ spec:
         - name: {{ .Values.api.messageBus.app }}
           image: "{{ .Values.api.messageBus.image }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
           ports:
             - containerPort: 8080

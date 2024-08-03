@@ -22,6 +22,14 @@ spec:
         - name: {{ .Values.api.grpc.app }}
           image: "{{ .Values.api.grpc.image }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3        
           ports:
             - containerPort: 8080
 ---
