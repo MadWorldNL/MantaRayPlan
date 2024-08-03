@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.api.messageBus.deployment }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.api.messageBus.app }}
+    name: {{ .Values.api.messageBus.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.api.messageBus.app }}
+      task: {{ .Values.api.messageBus.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.api.messageBus.app }}
+        task: {{ .Values.api.messageBus.name }}
+    spec:
+      containers:
+        - name: {{ .Values.api.messageBus.app }}
+          image: "{{ .Values.api.messageBus.image }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
