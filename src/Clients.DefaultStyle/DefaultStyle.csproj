@@ -15,10 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="wwwroot\app\img\.DS_Store" />
-    </ItemGroup>
-
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\app\js\script.js" />
     </ItemGroup>
 
