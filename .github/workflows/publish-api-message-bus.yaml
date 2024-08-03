@@ -1,4 +1,4 @@
-name: Create and publish an api grpc Docker image
+name: Create and publish an api message bus Docker image
 
 on:
   push:
