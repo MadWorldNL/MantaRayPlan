@@ -1,7 +1,7 @@
 namespace: "manta-ray-plan-production"
 
 image:
-  tag: "v0.4.2"
+  tag: "v0.4.3"
 
 clusterIssuer:
   enabled: true
