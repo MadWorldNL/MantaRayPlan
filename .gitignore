@@ -398,6 +398,3 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 .idea/
-
-# MantaRayPlan
-**/wwwroot/lib
