@@ -16,6 +16,24 @@
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\app\js\script.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-2.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-face-02.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-face-02.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-face-03.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-face-03.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-face-04.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-face-04.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-face-05.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-face-05.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-illustrated-01.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-illustrated-01.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-illustrated-02.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-illustrated-02.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-illustrated-03.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-illustrated-03.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-illustrated-04.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\avatar-illustrated-04.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\app\img\avatar\Avatar.svg" />
     </ItemGroup>
 
 </Project>
