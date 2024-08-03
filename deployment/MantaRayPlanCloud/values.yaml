@@ -1,7 +1,7 @@
 namespace: "manta-ray-plan"
 
 image:
-  tag: "v0.3.0"
+  tag: "latest"
 
 clusterIssuer:
   enabled: false
@@ -24,6 +24,11 @@ api:
     name: "api-grpc"
     loadBalancer: "api-grpc-loadbalancer"
     image: "ghcr.io/madworldnl/mantarayplan-api-grpc"
+  messageBus:
+    deployment: "api-message-bus-deployment"
+    app: "api-message-bus"
+    name: "api-message-bus"
+    image: "ghcr.io/madworldnl/mantarayplan-api-message-bus"
 
 admin:
   bff:

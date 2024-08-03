@@ -42,6 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		..\.github\workflows\publish-viewer-web.yaml = ..\.github\workflows\publish-viewer-web.yaml
 		..\.github\workflows\publish-admin-bff.yaml = ..\.github\workflows\publish-admin-bff.yaml
 		..\.github\workflows\publish-admin-web.yaml = ..\.github\workflows\publish-admin-web.yaml
+		..\.github\workflows\publish-api-message-bus.yaml = ..\.github\workflows\publish-api-message-bus.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Grpc", "Server.Controllers.Api.Grpc\Api.Grpc.csproj", "{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}"
@@ -88,6 +89,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStyle", "Clients.Def
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer.Shared", "Clients.Viewer.Shared\Viewer.Shared.csproj", "{2FFBF41F-559A-4EBC-9E2D-746FA6CFCEF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.MessageBus", "Server.Controllers.Api.MessageBus\Api.MessageBus.csproj", "{92E686EE-A916-494A-A6E3-CC7B89E12E6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +121,7 @@ Global
 		{D7968674-C415-4231-B919-69E19305BAD2} = {E6AB1870-91FA-415F-B091-0E5793AC961A}
 		{F97B03DB-2196-4E50-9211-C4D65A1D1A56} = {E67A783E-2FE1-48CE-831B-282A93B909F0}
 		{2FFBF41F-559A-4EBC-9E2D-746FA6CFCEF6} = {BBAAA2F8-0C03-4EAF-B64F-B326EB7E72B4}
+		{92E686EE-A916-494A-A6E3-CC7B89E12E6A} = {D3B456F8-34CA-4F60-8BFC-4794EED8D9A7}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -152,5 +156,9 @@ Global
 		{2FFBF41F-559A-4EBC-9E2D-746FA6CFCEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FFBF41F-559A-4EBC-9E2D-746FA6CFCEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FFBF41F-559A-4EBC-9E2D-746FA6CFCEF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E686EE-A916-494A-A6E3-CC7B89E12E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E686EE-A916-494A-A6E3-CC7B89E12E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E686EE-A916-494A-A6E3-CC7B89E12E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E686EE-A916-494A-A6E3-CC7B89E12E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
