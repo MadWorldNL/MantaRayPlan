@@ -14,11 +14,11 @@ COPY ["Server.Controllers.Api.MessageBus/Api.MessageBus.csproj", "Server.Control
 RUN dotnet restore "Server.Controllers.Api.MessageBus/Api.MessageBus.csproj"
 COPY . .
 WORKDIR "/src/Server.Controllers.Api.MessageBus"
-RUN dotnet build "Api.MessageBus.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "Api.MessageBus.csproj" -c "$BUILD_CONFIGURATION" -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Api.MessageBus.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Api.MessageBus.csproj" -c "$BUILD_CONFIGURATION" -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
