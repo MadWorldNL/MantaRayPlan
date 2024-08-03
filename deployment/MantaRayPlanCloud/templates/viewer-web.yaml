@@ -22,6 +22,14 @@ spec:
         - name: {{ .Values.viewer.web.app }}
           image: "{{ .Values.viewer.web.image }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz.txt
+              port: 80
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
           ports:
             - containerPort: 80
 ---
