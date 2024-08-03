@@ -14,8 +14,4 @@
         <PackageReference Include="Microsoft.Web.LibraryManager.Build" />
     </ItemGroup>
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\app\js\script.js" />
-    </ItemGroup>
-
 </Project>

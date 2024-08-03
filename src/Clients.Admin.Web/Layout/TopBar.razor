@@ -7,19 +7,31 @@
                 <span class="sr-only">Toggle menu</span>
                 <span class="icon menu-toggle--gray" aria-hidden="true"></span>
             </button>
+            <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme" @onclick="ToggleDarkModeProxy">
+                <span class="sr-only">Switch theme</span>
+                <i class="sun-icon fa-regular fa-sun" aria-hidden="true"></i>
+                <span class="white-moon">
+                    <i class="moon-icon fa-regular fa-moon" aria-hidden="true"></i>
+                </span>
+            </button>
         </div>
     </div>
 </nav>
 
 @code {
     private SideBar SideBar = null!;
+
+    private bool IsDarkMode;
+    private Action<bool> ToggleDarkMode = null!;
     
     private bool collapseNavMenu = false;
     
     private string _sideBarRotated => collapseNavMenu ? "rotated" : string.Empty;
     
-    public void Set(SideBar sideBar)
+    public void Set(Action<bool> toggleDarkMode, bool isDarkMode, SideBar sideBar)
     {
+        ToggleDarkMode = toggleDarkMode;
+        IsDarkMode = isDarkMode;
         SideBar = sideBar;
     }
     public void SetNavMenu(bool isCollapsed)
@@ -33,5 +45,12 @@
         collapseNavMenu = !collapseNavMenu;
         
         SideBar.SetNavMenu(collapseNavMenu);
+    }
+    
+    private void ToggleDarkModeProxy()
+    {
+        IsDarkMode = !IsDarkMode;
+        
+        ToggleDarkMode(IsDarkMode);
     }
 }
