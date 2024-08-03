@@ -3355,6 +3355,10 @@ label {
     color: #EFF0F6;
 }
 
+.darkmode i {
+    color: #EFF0F6;
+}
+
 .darkmode {
     color: #EFF0F6;
 }
@@ -3503,6 +3507,10 @@ label {
 
 .moon-icon {
     display: none;
+}
+
+.white-moon {
+    color: #EFF0F6;
 }
 
 @media (min-width: 576px) {
