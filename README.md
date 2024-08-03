@@ -38,6 +38,7 @@ docker compose up
     * Viewer.Mobile
     * Viewer.Web
     * Api.Grpc *
+    * Api.MessageBus *
 * Press run
 
 *This project is required to set as startup project
