@@ -1,5 +1,7 @@
 
+using System.Net;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Shouldly;
 
 namespace MadWorldNL.MantaRayPlan;
 
@@ -15,6 +17,6 @@ public class HealthCheckTests(WebApplicationFactory<Program> factory) : IClassFi
         var response = await client.GetAsync("/healthz");
 
         // Assert
-        response.EnsureSuccessStatusCode();
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
 }

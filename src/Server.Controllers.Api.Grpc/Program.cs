@@ -17,4 +17,4 @@ app.MapGet("/",
 
 await app.RunAsync();
 
-public partial class Program { }
+public abstract partial class Program { }
