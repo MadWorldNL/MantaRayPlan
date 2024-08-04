@@ -49,6 +49,7 @@ Before running the tests, ensure Docker is up and running.
 #### Option 1: From the cli
 Run the test projects in the src folder:
 ```shell
+sudo dotnet workload restore
 dotnet test
 ```
 
