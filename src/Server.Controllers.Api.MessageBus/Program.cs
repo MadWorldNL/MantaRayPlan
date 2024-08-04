@@ -9,3 +9,5 @@ var app = builder.Build();
 app.MapHealthChecks("/healthz");
 
 await app.RunAsync();
+
+public partial class Program { }
