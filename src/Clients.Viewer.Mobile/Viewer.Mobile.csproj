@@ -42,7 +42,7 @@
         <RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
     </PropertyGroup>
 
-    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('windows'))">
+    <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     </PropertyGroup>
     
