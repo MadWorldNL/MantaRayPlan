@@ -44,7 +44,16 @@ docker compose up
 *This project is required to set as startup project
 
 ### Running the tests
-*TODO*
+Before running the tests, ensure Docker is up and running.
+
+#### Option 1: From the cli
+Run the test projects in the src folder:
+```shell
+dotnet test
+```
+
+#### Option 2: From your editor
+Run the test projects by pressing the unit test run button in your editor.
 
 ## Documentation
 *TODO*
