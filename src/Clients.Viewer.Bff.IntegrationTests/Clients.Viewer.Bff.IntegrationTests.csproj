@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <AssemblyName>MadWorldNL.MantaRayPlan.Api.MessageBus.IntegrationTests</AssemblyName>
+        <AssemblyName>MadWorldNL.MantaRayPlan.Viewer.Bff.IntegrationTests</AssemblyName>
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Server.Controllers.Api.MessageBus\Api.MessageBus.csproj" />
+      <ProjectReference Include="..\Clients.Viewer.Bff\Viewer.Bff.csproj" />
     </ItemGroup>
 
 </Project>

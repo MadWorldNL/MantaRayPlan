@@ -35,3 +35,5 @@ app.MapGet("/weatherforecast", () =>
     .WithOpenApi();
 
 await app.RunAsync();
+
+public partial class Program { }
