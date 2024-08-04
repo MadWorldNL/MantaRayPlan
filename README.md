@@ -43,6 +43,8 @@ docker compose up
 
 *This project is required to set as startup project
 
+`dotnet workload restore` is required to install the necessary workloads for the project. You don't need to run this command if you have already installed the workloads.
+
 ### Running the tests
 Before running the tests, ensure Docker is up and running.
 
