@@ -20,4 +20,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="MadWorldNL.MantaRayPlan.Api.Grpc.IntegrationTests" />
+    </ItemGroup>
+
+
 </Project>
