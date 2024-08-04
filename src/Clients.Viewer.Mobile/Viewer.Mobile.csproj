@@ -37,14 +37,6 @@
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
-
-    <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
-        <RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
-        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    </PropertyGroup>
     
     <ItemGroup>
         <!-- App Icon -->
