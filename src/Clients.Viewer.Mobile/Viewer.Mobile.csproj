@@ -41,6 +41,10 @@
     <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
         <RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
     </PropertyGroup>
+
+    <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    </PropertyGroup>
     
     <ItemGroup>
         <!-- App Icon -->
