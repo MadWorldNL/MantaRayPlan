@@ -1,0 +1,4 @@
+Contact: mailto:oveldman@gmail.com
+Expires: 2025-12-31T23:00:00.000Z
+Preferred-Languages: nl, en
+Canonical: www.mad-world.nl/.well-known/security.txt
