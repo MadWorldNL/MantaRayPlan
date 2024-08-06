@@ -58,6 +58,17 @@ dotnet test
 #### Option 2: From your editor
 Run the test projects by pressing the unit test run button in your editor.
 
+## Production Applications
+Want to see the applications in action? Check out the links below:
+* **Web Viewer:** Here you can view the application as a user.
+  * [https://mantarayplan.mad-world.nl](https://mantarayplan.mad-world.nl/)
+* **Api Bff Viewer:** Here the web viewer gets its data.
+  * [https://viewer-bff-mantarayplan.mad-world.nl](https://viewer-bff-mantarayplan.mad-world.nl/swagger/index.html)
+* **Web Admin:** Here you can view the application as an admin.
+  * [https://admin-mantarayplan.mad-world.nl](https://admin-mantarayplan.mad-world.nl/)
+* **Api Bff Admin:** Here the web admin gets its data.
+  * [https://admin-bff-mantarayplan.mad-world.nl](https://admin-bff-mantarayplan.mad-world.nl/swagger/index.html)
+
 ## Documentation
 *TODO*
 
