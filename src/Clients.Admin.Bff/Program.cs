@@ -1,4 +1,7 @@
+using System.Threading.RateLimiting;
 using MadWorldNL.MantaRayPlan;
+using MadWorldNL.MantaRayPlan.Configurations;
+using Microsoft.AspNetCore.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,12 +10,23 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHealthChecks();
 
+builder.Services.AddRateLimiter(rl => rl
+    .AddFixedWindowLimiter(policyName: RateLimiterConfig.DefaultName, options =>
+    {
+        options.PermitLimit = 10;
+        options.Window = TimeSpan.FromSeconds(10);
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = 5;
+    }));
+
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapHealthChecks("/healthz");
+
+app.UseRateLimiter();
 
 var summaries = new[]
 {
@@ -32,7 +46,8 @@ app.MapGet("/weatherforecast", () =>
         return forecast;
     })
     .WithName("GetWeatherForecast")
-    .WithOpenApi();
+    .WithOpenApi()
+    .RequireRateLimiting(RateLimiterConfig.DefaultName);
 
 await app.RunAsync();
 
