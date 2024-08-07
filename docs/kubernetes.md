@@ -43,6 +43,10 @@ minikube addons enable ingress
 Convenient tools for debugging Kubernetes:
 ```shell
 minikube dashboard
+```
+
+Open access localhost domains like www.mantarayplan.localhost:
+```shell
 minikube tunnel
 ```
 
