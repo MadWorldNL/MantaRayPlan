@@ -1,4 +1,8 @@
 # Security Policy
+This document describes the security policy of the project. The security policy is a set of rules and practices that are
+used to protect the project from security vulnerabilities. The security policy is used to ensure that the project is secure
+and that the project is not vulnerable to attacks.
+
 ## Supported Versions
 The latest version of browser and operating system is supported. High possibilty that lower version are working well, but not guaranteed. There are not enough resources to test all versions.
 
@@ -21,10 +25,5 @@ Supported operating systems for native applications:
 | Other            | Lower versions | :x:                |
 
 ## Reporting a Vulnerability
-*TODO*
-
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+You can create an issue in the repository. The issue will be reviewed and a decision will be made on how to proceed. 
+If the issue is accepted, it will be fixed in the next release. If the issue is rejected, the reason will be explained in the issue.
