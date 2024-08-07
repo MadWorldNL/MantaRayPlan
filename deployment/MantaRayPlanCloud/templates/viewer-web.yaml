@@ -1,3 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.viewer.web.app }}-nginx-config"
+  namespace: {{ .Values.namespace }}
+data:
+  default.conf: |
+    server {
+        listen       80;
+        listen  [::]:80;
+        server_name  localhost;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+
+        add_header X-Frame-Options "DENY" always;
+        add_header Referrer-Policy "no-referrer";
+        add_header X-Content-Type-Options "nosniff";
+        add_header Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()";
+                add_header content-security-policy "default-src 'self' https://{{ .Values.viewer.bff.host }}; img-src 'self' data: ; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://{{ .Values.viewer.bff.host }}; upgrade-insecure-requests; frame-ancestors 'self'";
+    }
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -30,8 +59,17 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 1
             failureThreshold: 3
+          volumeMounts:
+            - name: "{{ .Values.viewer.web.app }}-nginx-config-volume"
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+              readOnly: true
           ports:
             - containerPort: 80
+      volumes:
+        - name: "{{ .Values.viewer.web.app }}-nginx-config-volume"
+          configMap:
+            name: "{{ .Values.viewer.web.app }}-nginx-config"
 ---
 apiVersion: v1
 kind: Service
