@@ -1,19 +1,27 @@
 # Security Policy
-*TODO*
-
 ## Supported Versions
+The latest version of browser and operating system is supported. High possibilty that lower version are working well, but not guaranteed. There are not enough resources to test all versions.
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Supported browsers for web applications:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Browser           | Version        | Supported          |
+|-------------------|----------------|--------------------|
+| Google Chrome     | Latest         | :white_check_mark: |
+| Firefox           | Latest         | :white_check_mark: |
+| Safari            | Latest         | :white_check_mark: |
+| Chromium Browsers | Latest         | :white_check_mark: |
+| Other             | Lower versions | :x:                |
+
+Supported operating systems for native applications:
+
+| Operating system | Version        | Supported          |
+|------------------|----------------|--------------------|
+| Android          | Latest         | :white_check_mark: |
+| iOS              | Latest         | :white_check_mark: |
+| Other            | Lower versions | :x:                |
 
 ## Reporting a Vulnerability
+*TODO*
 
 Use this section to tell people how to report a vulnerability.
 
