@@ -3,8 +3,10 @@
 
 # MantaRayPlan 
 MantaRayPlan is a scheduling application that allows you to share your agenda with friends and family. 
-Designed for multiple users, this application is available on multiple platforms, making it easier to plan together. 
-Currently, MantaRayPlan is in the setup phase and is not yet usable.
+Designed for multiple users, this application is available on multiple platforms, making it easier to plan together.
+
+> [!WARNING]
+> Currently, MantaRayPlan is in the setup phase and is not yet usable.
 
 ## Key Features
 *TODO*
