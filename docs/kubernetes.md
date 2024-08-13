@@ -118,6 +118,12 @@ Navigate to the folder `deployment/MantaRayPlanCloud` and execute this command:
 microk8s helm install -f environments/values-production.yaml manta-ray-plan-cloud .
 ```
 
+### Step 3 - Status of Cluster
+Convenient tools for debugging Kubernetes:
+```shell
+microk8s dashboard-proxy --address 0.0.0.0
+```
+
 See [Deploy to minikube](#deploy-to-minikube) for other helm reference
 
 ## Reference
