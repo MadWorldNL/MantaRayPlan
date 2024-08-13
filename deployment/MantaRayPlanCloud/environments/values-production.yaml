@@ -24,6 +24,6 @@ viewer:
 logging:
   seq:
     outsideAccess: 
-      enable: false
+      enable: true
     host: "seq.mad-world.nl"
     firstTimePassword: "QFCKH3NTSBQ5zmsH9DpXTB2YefIavEGJKa4SshKb11AXX8b4o4KPjuo9bd6WBfqDkpxKqzNjaOrCsE49ph369Wx84mIrksnJx5OtRcxAOjff"
