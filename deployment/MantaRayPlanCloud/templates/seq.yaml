@@ -1,3 +1,36 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: seq-pv-volume
+  namespace: {{ .Values.namespace }}
+  labels:
+    type: local
+    app: {{ .Values.logging.seq.app }}
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/MantaRayPlan/Seq"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: seq-pv-claim
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.logging.seq.app }}
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,6 +64,13 @@ spec:
             value: "{{ .Values.logging.seq.firstTimePassword }}"
           ports:
             - containerPort: 80
+          volumeMounts:
+            - mountPath: "/data"
+              name: seqvolume
+      volumes:
+        - name: seqvolume
+          persistentVolumeClaim:
+            claimName: seq-pv-claim
 ---
 apiVersion: v1
 kind: Service
