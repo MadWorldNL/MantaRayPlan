@@ -20,3 +20,10 @@ viewer:
     host: "viewer-bff-mantarayplan.mad-world.nl"
   web:
     host: "mantarayplan.mad-world.nl"
+
+logging:
+  seq:
+    outsideAccess: 
+      enable: false
+    host: "seq.mad-world.nl"
+    firstTimePassword: "QFCKH3NTSBQ5zmsH9DpXTB2YefIavEGJKa4SshKb11AXX8b4o4KPjuo9bd6WBfqDkpxKqzNjaOrCsE49ph369Wx84mIrksnJx5OtRcxAOjff"

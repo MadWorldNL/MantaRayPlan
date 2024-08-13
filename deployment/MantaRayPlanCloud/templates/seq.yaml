@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.logging.seq.deployment }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.logging.seq.app }}
+    name: {{ .Values.logging.seq.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.logging.seq.app }}
+      task: {{ .Values.logging.seq.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.logging.seq.app }}
+        task: {{ .Values.logging.seq.name }}
+    spec:
+      containers:
+        - name: {{ .Values.logging.seq.app }}
+          image: "{{ .Values.logging.seq.image }}:{{ .Values.logging.seq.tag }}"
+          imagePullPolicy: Always
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: SEQ_FIRSTRUN_ADMINUSERNAME
+            value: "admin"
+          - name: SEQ_FIRSTRUN_ADMINPASSWORDHASH
+            value: "{{ .Values.logging.seq.firstTimePassword }}"
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.logging.seq.loadBalancer }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: {{ .Values.logging.seq.app }}
+    task: {{ .Values.logging.seq.name }}
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
