@@ -37,14 +37,14 @@ admin:
     name: "admin-bff"
     loadBalancer: "admin-bff-loadbalancer"
     image: "ghcr.io/madworldnl/mantarayplan-admin-bff"
-    host: "admin-bff.mantarayplan.localhost"
+    host: "admin.bff.mantarayplan"
   web:
     deployment: "admin-web-deployment"
     app: "admin-web"
     name: "admin-web"
     loadBalancer: "admin-web-loadbalancer"
     image: "ghcr.io/madworldnl/mantarayplan-admin-web"
-    host: "admin.mantarayplan.localhost"
+    host: "admin.mantarayplan"
 
 viewer:
   bff:
@@ -53,11 +53,24 @@ viewer:
     name: "viewer-bff"
     loadBalancer: "viewer-bff-loadbalancer"
     image: "ghcr.io/madworldnl/mantarayplan-viewer-bff"
-    host: "viewer-bff.mantarayplan.localhost"
+    host: "viewer.bff.mantarayplan"
   web:
     deployment: "viewer-web-deployment"
     app: "viewer-web"
     name: "viewer-web"
     loadBalancer: "viewer-web-loadbalancer"
     image: "ghcr.io/madworldnl/mantarayplan-viewer-web"
-    host: "viewer.mantarayplan.localhost"
+    host: "viewer.mantarayplan"
+
+logging:
+  seq:
+    outsideAccess: 
+      enabled: true
+    deployment: "seq-deployment"
+    app: "seq"
+    name: "seq"
+    loadBalancer: "seq-loadbalancer"
+    image: "datalust/seq"
+    tag: "latest"
+    host: "seq.mantarayplan"
+    firstTimePassword: "QFCKH3NTSBQ5zmsH9DpXTB2YefIavEGJKa4SshKb11AXX8b4o4KPjuo9bd6WBfqDkpxKqzNjaOrCsE49ph369Wx84mIrksnJx5OtRcxAOjff"

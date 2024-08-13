@@ -9,7 +9,7 @@ metadata:
     cert-manager.io/subject-countries: {{ .Values.certification.country }}
     cert-manager.io/email-sans: {{ .Values.certification.email }}
 spec:
-{{- if .Values.clusterIssuer.enabled }}
+  {{- if .Values.clusterIssuer.enabled }}
   ingressClassName: nginx
   tls:
     - hosts:
@@ -18,8 +18,9 @@ spec:
         - {{ .Values.admin.web.host }}
         - {{ .Values.viewer.bff.host }}
         - {{ .Values.viewer.web.host }}
+        - {{ .Values.logging.seq.host }}
       secretName: madworld-tls
-{{ end }}
+  {{ end }}
   rules:
     - host: {{ .Values.admin.bff.host }}
       http:
@@ -70,4 +71,16 @@ spec:
               service:
                 name: {{ .Values.viewer.web.loadBalancer }}
                 port:
+                  number: 80 
+  {{- if .Values.logging.seq.outsideAccess.enabled }}
+    - host: {{ .Values.logging.seq.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.logging.seq.loadBalancer }}
+                port:
                   number: 80
+  {{ end }}

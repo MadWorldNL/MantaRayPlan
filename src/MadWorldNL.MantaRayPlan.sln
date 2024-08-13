@@ -83,6 +83,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D7968674-C
 		..\docs\kubernetes.md = ..\docs\kubernetes.md
 		..\docs\dns.md = ..\docs\dns.md
 		..\docs\server.md = ..\docs\server.md
+		..\docs\setup.md = ..\docs\setup.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStyle", "Clients.DefaultStyle\DefaultStyle.csproj", "{F97B03DB-2196-4E50-9211-C4D65A1D1A56}"

@@ -60,3 +60,17 @@ services:
     ports:
       - "8090:80"
       - "8091:443"
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINUSERNAME=admin
+      # The hashed password is in clear text: Secret1234
+      - SEQ_FIRSTRUN_ADMINPASSWORDHASH=QFCKH3NTSBQ5zmsH9DpXTB2YefIavEGJKa4SshKb11AXX8b4o4KPjuo9bd6WBfqDkpxKqzNjaOrCsE49ph369Wx84mIrksnJx5OtRcxAOjff
+    ports:
+      - "5341:80"
+    volumes:
+      - seq-data:/data
+volumes:
+  seq-data:

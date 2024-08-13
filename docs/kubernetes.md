@@ -55,6 +55,18 @@ When you stop development for the day:
 minikube stop
 ```
 
+### Host file
+To access your local kubernetes containers, you need to add the following lines to your host file:
+```shell
+127.0.0.1       seq.mantarayplan
+127.0.0.1       admin.bff.mantarayplan
+127.0.0.1       admin.mantarayplan
+127.0.0.1       viewer.bff.mantarayplan
+127.0.0.1       viewer.mantarayplan
+```
+In MacOS and Linux, the host file is located at `/etc/hosts`.
+In Windows, the host file is located at `C:\Windows\System32\drivers\etc\hosts`.
+
 ### Deploy to minikube
 Install the cluster for the first time:
 ```shell
