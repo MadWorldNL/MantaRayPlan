@@ -8,18 +8,20 @@ using OpenTelemetry.Logs;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
+                            new OpenTelemetryConfig();
+
 builder.Services.AddOpenTelemetry()
     .WithLogging(loggerBuilder =>
     {
         loggerBuilder.AddOtlpExporter(options =>
         {
-            options.Endpoint = new Uri("http://localhost:5341/ingest/otlp/v1/logs");
+            options.Endpoint = new Uri($"{openTelemetryConfig.LoggerEndpoint}/ingest/otlp/v1/logs");
             options.Protocol = OtlpExportProtocol.HttpProtobuf;
-    
-            // TODO add api keys
-            if (false)
+            
+            if (!string.IsNullOrEmpty(openTelemetryConfig.LoggerApiKey))
             {
-                options.Headers = "X-Seq-ApiKey=abcde12345";
+                options.Headers = $"X-Seq-ApiKey={openTelemetryConfig.LoggerApiKey}";
             }
         });
     });

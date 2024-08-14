@@ -4,6 +4,6 @@ public class OpenTelemetryConfig
 {
     public const string Key = "OpenTelemetry";
 
-    public string LoggerEndpoint { get; set; } = "http://localhost:5341";
-    public string LoggerApiKey { get; set; } = "X-Seq-ApiKey=abcde12345";
+    public string LoggerApiKey { get; init; } = string.Empty;
+    public string LoggerEndpoint { get; init; } = string.Empty;
 }
