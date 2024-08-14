@@ -13,7 +13,9 @@ This document describes how to setup the Manta Ray Plan in production.
    2. Enable Require authentication for all incoming events
    3. Create a new API key for every service that will be sending logs to Seq
    4. Copy the API key and save it in a secure location
-3. Navigate to your account settings page
+3. Navigate to the retention policies page
+   1. Add a retention policy to match your requirements. At the moment there is no policy in place.
+4. Navigate to your account settings page
    1. Change your default password
 
 ## Values-production.yaml
