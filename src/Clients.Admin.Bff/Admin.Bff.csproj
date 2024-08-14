@@ -8,6 +8,11 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="OpenTelemetry" />
+        <PackageReference Include="OpenTelemetry.Exporter.Console" />
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
         <PackageReference Include="Swashbuckle.AspNetCore" />
     </ItemGroup>
 

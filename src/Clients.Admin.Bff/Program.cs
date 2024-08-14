@@ -2,8 +2,27 @@ using System.Threading.RateLimiting;
 using MadWorldNL.MantaRayPlan;
 using MadWorldNL.MantaRayPlan.Configurations;
 using Microsoft.AspNetCore.RateLimiting;
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddOpenTelemetry()
+    .WithLogging(loggerBuilder =>
+    {
+        loggerBuilder.AddOtlpExporter(options =>
+        {
+            options.Endpoint = new Uri("http://localhost:5341/ingest/otlp/v1/logs");
+            options.Protocol = OtlpExportProtocol.HttpProtobuf;
+    
+            // TODO add api keys
+            if (false)
+            {
+                options.Headers = "X-Seq-ApiKey=abcde12345";
+            }
+        });
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
