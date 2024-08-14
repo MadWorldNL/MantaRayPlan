@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
                           new OpenTelemetryConfig();
 
-builder.Services.AddDefaultOpenTelemetry(openTelemetryConfig);
+builder.AddDefaultOpenTelemetry(openTelemetryConfig);
 
 builder.Services.AddGrpc();
 builder.Services.AddHealthChecks();

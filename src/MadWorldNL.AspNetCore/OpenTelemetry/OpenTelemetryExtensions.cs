@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Resources;
@@ -6,16 +8,23 @@ using OpenTelemetry.Resources;
 namespace MadWorldNL.MantaRayPlan.OpenTelemetry;
 
 public static class OpenTelemetryExtensions
-{
-    public static void AddDefaultOpenTelemetry(this IServiceCollection services, OpenTelemetryConfig config)
+{   
+    public static void AddDefaultOpenTelemetry(this WebApplicationBuilder builder, OpenTelemetryConfig config)
     {
-        services.AddOpenTelemetry()
+        builder.Logging.AddOpenTelemetry(logging =>
+        {
+            logging.IncludeFormattedMessage = true;
+            logging.IncludeScopes = true;
+        });
+        
+        builder.Services.AddOpenTelemetry()
             .WithLogging(loggerBuilder =>
             {
-                loggerBuilder.ConfigureResource(builder =>
+                loggerBuilder.ConfigureResource(resourceBuilder =>
                 {
-                    builder.AddService(config.Application);
+                    resourceBuilder.AddService(config.Application);
                 });
+                
                 loggerBuilder.AddOtlpExporter(options =>
                 {
                     options.Endpoint = new Uri($"{config.LoggerEndpoint}/ingest/otlp/v1/logs");

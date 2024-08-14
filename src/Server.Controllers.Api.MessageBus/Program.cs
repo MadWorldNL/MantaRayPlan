@@ -5,9 +5,9 @@ using MadWorldNL.MantaRayPlan.OpenTelemetry;
 var builder = WebApplication.CreateBuilder();
 
 var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
-                          new OpenTelemetryConfig();
+                            new OpenTelemetryConfig();
 
-builder.Services.AddDefaultOpenTelemetry(openTelemetryConfig);
+builder.AddDefaultOpenTelemetry(openTelemetryConfig);
 
 builder.Services.AddHealthChecks();
 
