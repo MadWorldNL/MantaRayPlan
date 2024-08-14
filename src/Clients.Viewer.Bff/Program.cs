@@ -1,9 +1,15 @@
 using System.Threading.RateLimiting;
 using MadWorldNL.MantaRayPlan;
 using MadWorldNL.MantaRayPlan.Configurations;
+using MadWorldNL.MantaRayPlan.OpenTelemetry;
 using Microsoft.AspNetCore.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
+                          new OpenTelemetryConfig();
+
+builder.Services.AddDefaultOpenTelemetry(openTelemetryConfig);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

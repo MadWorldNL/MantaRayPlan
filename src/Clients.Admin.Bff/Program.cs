@@ -1,6 +1,7 @@
 using System.Threading.RateLimiting;
 using MadWorldNL.MantaRayPlan;
 using MadWorldNL.MantaRayPlan.Configurations;
+using MadWorldNL.MantaRayPlan.OpenTelemetry;
 using Microsoft.AspNetCore.RateLimiting;
 using OpenTelemetry;
 using OpenTelemetry.Exporter;
@@ -11,20 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
                             new OpenTelemetryConfig();
 
-builder.Services.AddOpenTelemetry()
-    .WithLogging(loggerBuilder =>
-    {
-        loggerBuilder.AddOtlpExporter(options =>
-        {
-            options.Endpoint = new Uri($"{openTelemetryConfig.LoggerEndpoint}/ingest/otlp/v1/logs");
-            options.Protocol = OtlpExportProtocol.HttpProtobuf;
-            
-            if (!string.IsNullOrEmpty(openTelemetryConfig.LoggerApiKey))
-            {
-                options.Headers = $"X-Seq-ApiKey={openTelemetryConfig.LoggerApiKey}";
-            }
-        });
-    });
+builder.Services.AddDefaultOpenTelemetry(openTelemetryConfig);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

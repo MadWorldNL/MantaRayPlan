@@ -21,4 +21,8 @@
         <InternalsVisibleTo Include="MadWorldNL.MantaRayPlan.Viewer.Bff.IntegrationTests" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj" />
+    </ItemGroup>
+
 </Project>
