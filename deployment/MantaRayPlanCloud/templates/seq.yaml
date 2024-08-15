@@ -1,3 +1,39 @@
+{{- $seqSecrets := (lookup "v1" "Secret" .Values.namespace .Values.logging.seq.secrets.name ) -}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.logging.seq.secrets.name }}
+  namespace: {{ .Values.namespace }}
+type: Opaque
+data:
+{{- if and $seqSecrets $seqSecrets.data }}
+  {{- if $seqSecrets.data.apiKeyMessageBus }}
+  apiKeyMessageBus: {{ $seqSecrets.data.apiKeyMessageBus }}
+  {{- else }}
+  apiKeyMessageBus: {{ "nonExistingKey1234" | b64enc }}
+  {{- end }}
+  {{- if $seqSecrets.data.apiKeyGrpc }}
+  apiKeyGrpc: {{ $seqSecrets.data.apiKeyGrpc }}
+  {{- else }}
+  apiKeyGrpc: {{ "nonExistingKey1234" | b64enc }}
+  {{- end }}
+  {{- if $seqSecrets.data.apiKeyAdmin }}
+  apiKeyAdmin: {{ $seqSecrets.data.apiKeyAdmin }}
+  {{- else }}
+  apiKeyAdmin: {{ "nonExistingKey1234" | b64enc }}
+  {{- end }}
+  {{- if $seqSecrets.data.apiKeyViewer }}
+  apiKeyViewer: {{ $seqSecrets.data.apiKeyViewer }}
+  {{- else }}
+  apiKeyViewer: {{ "nonExistingKey1234" | b64enc }}
+  {{- end }}
+{{- else }}
+  apiKeyMessageBus: {{ "nonExistingKey1234" | b64enc }}
+  apiKeyGrpc: {{ "nonExistingKey1234" | b64enc }}
+  apiKeyAdmin: {{ "nonExistingKey1234" | b64enc }}
+  apiKeyViewer: {{ "nonExistingKey1234" | b64enc }}
+{{- end }}
+---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
