@@ -104,6 +104,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.Bff.IntegrationTests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clients.Viewer.Bff.IntegrationTests", "Clients.Viewer.Bff.IntegrationTests\Clients.Viewer.Bff.IntegrationTests.csproj", "{8E9BB031-53C2-4596-9263-9B6E2DE047AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorldNL.AspNetCore", "MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj", "{0A7B29AB-26C2-450E-BDDD-BA9630102056}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,7 @@ Global
 		{766C958F-70F5-4901-80C7-CA586DB93AFC} = {A8D5940E-5887-46F8-B85A-5210A2E2A2FC}
 		{84EF736D-8B49-4B8B-8319-E28B71B483D2} = {3A4CBE5B-7767-48D2-888C-B26D8DE50F1B}
 		{8E9BB031-53C2-4596-9263-9B6E2DE047AD} = {766C958F-70F5-4901-80C7-CA586DB93AFC}
+		{0A7B29AB-26C2-450E-BDDD-BA9630102056} = {74D4AB3E-1584-45CB-B683-3507C4CFE299}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -195,5 +198,9 @@ Global
 		{8E9BB031-53C2-4596-9263-9B6E2DE047AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E9BB031-53C2-4596-9263-9B6E2DE047AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E9BB031-53C2-4596-9263-9B6E2DE047AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A7B29AB-26C2-450E-BDDD-BA9630102056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A7B29AB-26C2-450E-BDDD-BA9630102056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A7B29AB-26C2-450E-BDDD-BA9630102056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A7B29AB-26C2-450E-BDDD-BA9630102056}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

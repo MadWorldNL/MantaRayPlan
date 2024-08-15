@@ -30,6 +30,14 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 1
             failureThreshold: 3
+          env:
+            - name: OpenTelemetry__LoggerEndpoint
+              value: "{{ .Values.logging.seq.host.internal }}"
+            - name: OpenTelemetry__LoggerApiKey
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.logging.seq.secrets.name }}
+                  key: apiKeyAdmin 
           ports:
             - containerPort: 8080
 ---

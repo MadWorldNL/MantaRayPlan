@@ -16,4 +16,8 @@
         <InternalsVisibleTo Include="MadWorldNL.MantaRayPlan.Api.MessageBus.IntegrationTests" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj" />
+    </ItemGroup>
+
 </Project>
