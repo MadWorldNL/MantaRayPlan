@@ -18,7 +18,7 @@ spec:
         - {{ .Values.admin.web.host }}
         - {{ .Values.viewer.bff.host }}
         - {{ .Values.viewer.web.host }}
-        - {{ .Values.logging.seq.host }}
+        - {{ .Values.logging.seq.host.external }}
       secretName: madworld-tls
   {{ end }}
   rules:
