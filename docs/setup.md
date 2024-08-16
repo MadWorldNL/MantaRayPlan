@@ -2,9 +2,25 @@
 This document describes how to setup the Manta Ray Plan in production.
 
 ## Kubernetes
-1. Download the helm chart to your server.
+1. Install kubernetes from our [kubernetes.md](kubernetes.md) guide.
+2. Download the helm chart to your server.
 2. Change every values in the `environments/values-production.yaml` file to match your requirements.
 3. Install or upgrade the cluster
+
+## Postgresql Install
+Use this install command to install the postgresql chart:
+```shell
+helm repo add cnpg https://cloudnative-pg.github.io/charts
+helm upgrade --install cnpg \
+  --namespace cnpg-system \
+  --create-namespace \
+  cnpg/cloudnative-pg
+```
+## Values-production.yaml
+*TODO*
+
+## Deploy
+Deploy now to kubernetes and wait for the pods to be ready.
 
 ## Seq
 1. Visit your seq url 
@@ -17,6 +33,3 @@ This document describes how to setup the Manta Ray Plan in production.
    1. Add a retention policy to match your requirements. At the moment there is no policy in place.
 4. Navigate to your account settings page
    1. Change your default password
-
-## Values-production.yaml
-*TODO*
