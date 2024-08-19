@@ -1,3 +1,34 @@
+apiVersion: hostpathprovisioner.kubevirt.io/v1beta1
+kind: HostPathProvisioner
+metadata:
+  name: hostpath-provisioner
+  namespace: hostpath-provisioner
+spec:
+  imagePullPolicy: Always
+  storagePools:
+    - name: "postgres-pool"
+      pvcTemplate:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.database.size.combined }}
+      path: "/MantaRayPlan/Postgres"
+  workload:
+    nodeSelector:
+      kubernetes.io/os: linux
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: postgres-csi
+  namespace: hostpath-provisioner
+provisioner: kubevirt.io.hostpath-provisioner
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  storagePool: postgres-pool
+---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -5,5 +36,26 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   instances: 3
+  primaryUpdateStrategy: unsupervised
   storage:
-    size: 1Gi
+    size: {{ .Values.database.size.single }}
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: {{ .Values.database.size.single }}
+      storageClassName: postgres-csi
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: backup-example
+  namespace: {{ .Values.namespace }}
+spec:
+  schedule: "0 0 0 * * *"
+  backupOwnerReference: self
+  cluster:
+    name: postgres
+  immediate: true
+  

@@ -16,6 +16,36 @@ helm upgrade --install cnpg \
   --create-namespace \
   cnpg/cloudnative-pg
 ```
+As of version 0.11 the hostpath provisioner operator now requires [cert manager](https://github.com/cert-manager/cert-manager) to be installed before deploying the operator. This is because the operator now has a validating webhook that verifies the contents of the CR are valid.
+Before deploying the operator, you need to install cert manager:
+
+```bash
+kubectl create -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.yaml
+```
+
+Please ensure the cert manager is fully operational before installing the hostpath provisioner operator:  
+
+```bash
+kubectl wait --for=condition=Available -n cert-manager --timeout=120s --all deployments
+```
+
+Next, you need to create the hostpath provisioner namespace:
+
+```bash
+kubectl create -f https://raw.githubusercontent.com/kubevirt/hostpath-provisioner-operator/main/deploy/namespace.yaml
+```
+
+Followed by the webhook:
+```bash
+kubectl create -f https://raw.githubusercontent.com/kubevirt/hostpath-provisioner-operator/main/deploy/webhook.yaml -n hostpath-provisioner
+```
+
+And then you can create the operator:
+
+```bash
+kubectl create -f https://raw.githubusercontent.com/kubevirt/hostpath-provisioner-operator/main/deploy/operator.yaml -n hostpath-provisioner
+```
+
 ## Values-production.yaml
 *TODO*
 
@@ -33,3 +63,7 @@ Deploy now to kubernetes and wait for the pods to be ready.
    1. Add a retention policy to match your requirements. At the moment there is no policy in place.
 4. Navigate to your account settings page
    1. Change your default password
+
+## Reference
+[Install Guide Cloud Native PG](https://cloudnative-pg.io/documentation/1.23/installation_upgrade/)\
+[Install Hostpath Provisioner](https://github.com/kubevirt/hostpath-provisioner-operator)
