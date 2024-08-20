@@ -33,3 +33,8 @@ database:
   size:
     single: 10Gi
     combined: 35Gi
+
+pgadmin:
+  outsideAccess: 
+    enabled: true
+  host: "database.mad-world.nl"

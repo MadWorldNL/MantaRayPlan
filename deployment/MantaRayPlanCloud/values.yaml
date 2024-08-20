@@ -83,3 +83,12 @@ database:
   size:
     single: 1Gi
     combined: 4Gi
+
+pgadmin:
+  outsideAccess: 
+    enabled: true
+  app: pgadmin
+  deployment: pgadmin-deployment
+  loadBalancer: "pgadmin-loadbalancer"
+  name: pgadmin
+  host: "database.mantarayplan"
