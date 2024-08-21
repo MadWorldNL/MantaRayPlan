@@ -13,7 +13,7 @@ spec:
     storage: 5Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:
     path: "/MantaRayPlan/Pgadmin"
 ---
@@ -27,7 +27,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
@@ -56,6 +56,9 @@ spec:
         - name: {{ .Values.pgadmin.app }}
           image: "dpage/pgadmin4:latest"
           imagePullPolicy: Always
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
           env:
           - name: PGADMIN_DEFAULT_EMAIL
             value: "test@test.nl"

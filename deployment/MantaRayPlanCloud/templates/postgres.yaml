@@ -1,3 +1,13 @@
+apiVersion: v1
+data:
+  username: YXBw
+  password: U2VjcmV0MTIzNA==
+kind: Secret
+metadata:
+  name: postgres-secret
+  namespace: {{ .Values.namespace }}
+type: kubernetes.io/basic-auth
+---
 apiVersion: hostpathprovisioner.kubevirt.io/v1beta1
 kind: HostPathProvisioner
 metadata:
@@ -37,6 +47,12 @@ metadata:
 spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
+  bootstrap:
+    initdb:
+      database: maintenance
+      owner: app
+      secret: 
+        name: postgres-secret
   storage:
     size: {{ .Values.database.size.single }}
     pvcTemplate:
@@ -46,16 +62,4 @@ spec:
         requests:
           storage: {{ .Values.database.size.single }}
       storageClassName: postgres-csi
----
-apiVersion: postgresql.cnpg.io/v1
-kind: ScheduledBackup
-metadata:
-  name: backup-example
-  namespace: {{ .Values.namespace }}
-spec:
-  schedule: "0 0 0 * * *"
-  backupOwnerReference: self
-  cluster:
-    name: postgres
-  immediate: true
   
