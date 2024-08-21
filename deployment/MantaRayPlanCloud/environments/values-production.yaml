@@ -38,3 +38,4 @@ pgadmin:
   outsideAccess: 
     enabled: true
   host: "database.mad-world.nl"
+  username: admin@mad-world.nl

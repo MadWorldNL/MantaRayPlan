@@ -1,3 +1,21 @@
+{{- $pgadminSecrets := (lookup "v1" "Secret" .Values.namespace .Values.pgadmin.name ) -}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.pgadmin.secret.name }}
+  namespace: {{ .Values.namespace }}
+type: kubernetes.io/basic-auth
+data:
+  username: {{ .Values.pgadmin.username | b64enc }}
+{{- if and $pgadminSecrets $pgadminSecrets.data }}
+  {{- if $pgadminSecrets.data.password }}
+  password: {{ $pgadminSecrets.data.password }}
+  {{- else }}
+  password: {{ "nonExistingKey1234" | b64enc }}
+  {{- end }}
+{{- else }}
+  password: {{ "nonExistingKey1234" | b64enc }}
+{{- end }}
 ---
 kind: PersistentVolume
 apiVersion: v1
@@ -61,9 +79,15 @@ spec:
             runAsGroup: 0
           env:
           - name: PGADMIN_DEFAULT_EMAIL
-            value: "test@test.nl"
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.pgadmin.secret.name }}
+                key: username
           - name: PGADMIN_DEFAULT_PASSWORD
-            value: "Secret1234"
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.pgadmin.secret.name }}
+                key: password
           ports:
             - containerPort: 80
           volumeMounts:

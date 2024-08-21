@@ -1,12 +1,21 @@
+{{- $postgresSecrets := (lookup "v1" "Secret" .Values.namespace .Values.database.name ) -}}
 apiVersion: v1
-data:
-  username: YXBw
-  password: U2VjcmV0MTIzNA==
 kind: Secret
 metadata:
   name: postgres-secret
   namespace: {{ .Values.namespace }}
 type: kubernetes.io/basic-auth
+data:
+  username: {{ "app" | b64enc }}
+{{- if and $postgresSecrets $postgresSecrets.data }}
+  {{- if $postgresSecrets.data.password }}
+  password: {{ $postgresSecrets.data.password }}
+  {{- else }}
+  password: {{ "nonExistingKey1234" | b64enc }}
+  {{- end }}
+{{- else }}
+  password: {{ "nonExistingKey1234" | b64enc }}
+{{- end }}
 ---
 apiVersion: hostpathprovisioner.kubevirt.io/v1beta1
 kind: HostPathProvisioner
@@ -39,10 +48,11 @@ volumeBindingMode: WaitForFirstConsumer
 parameters:
   storagePool: postgres-pool
 ---
+{{- if .Values.database.enabled }}
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres
+  name: {{ .Values.database.name }}
   namespace: {{ .Values.namespace }}
 spec:
   instances: 3
@@ -62,4 +72,4 @@ spec:
         requests:
           storage: {{ .Values.database.size.single }}
       storageClassName: postgres-csi
-  
+{{ end }}
