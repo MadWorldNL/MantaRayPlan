@@ -84,6 +84,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D7968674-C
 		..\docs\dns.md = ..\docs\dns.md
 		..\docs\server.md = ..\docs\server.md
 		..\docs\setup.md = ..\docs\setup.md
+		..\docs\database.md = ..\docs\database.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStyle", "Clients.DefaultStyle\DefaultStyle.csproj", "{F97B03DB-2196-4E50-9211-C4D65A1D1A56}"
@@ -107,6 +108,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorldNL.AspNetCore", "MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj", "{0A7B29AB-26C2-450E-BDDD-BA9630102056}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "Server.DataAccess.DataBase\DataBase.csproj", "{83D6CB96-9E05-446D-8C2D-4D8AFD83DF66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Server.Logic.Domain\Domain.csproj", "{1803C1EF-6193-4CE5-A37A-16F920F2388D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions", "Server.Logic.Functions\Functions.csproj", "{3952C3C4-FB97-4441-9608-A5B7C3BC4E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +152,8 @@ Global
 		{8E9BB031-53C2-4596-9263-9B6E2DE047AD} = {766C958F-70F5-4901-80C7-CA586DB93AFC}
 		{0A7B29AB-26C2-450E-BDDD-BA9630102056} = {74D4AB3E-1584-45CB-B683-3507C4CFE299}
 		{83D6CB96-9E05-446D-8C2D-4D8AFD83DF66} = {B2F8D186-415B-4F36-BCDC-D13A1159B8C2}
+		{1803C1EF-6193-4CE5-A37A-16F920F2388D} = {A7B2EEF8-045E-4473-9DE2-6452F5E14CE3}
+		{3952C3C4-FB97-4441-9608-A5B7C3BC4E53} = {A7B2EEF8-045E-4473-9DE2-6452F5E14CE3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -209,5 +216,13 @@ Global
 		{83D6CB96-9E05-446D-8C2D-4D8AFD83DF66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83D6CB96-9E05-446D-8C2D-4D8AFD83DF66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83D6CB96-9E05-446D-8C2D-4D8AFD83DF66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1803C1EF-6193-4CE5-A37A-16F920F2388D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1803C1EF-6193-4CE5-A37A-16F920F2388D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1803C1EF-6193-4CE5-A37A-16F920F2388D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1803C1EF-6193-4CE5-A37A-16F920F2388D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3952C3C4-FB97-4441-9608-A5B7C3BC4E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3952C3C4-FB97-4441-9608-A5B7C3BC4E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3952C3C4-FB97-4441-9608-A5B7C3BC4E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3952C3C4-FB97-4441-9608-A5B7C3BC4E53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
