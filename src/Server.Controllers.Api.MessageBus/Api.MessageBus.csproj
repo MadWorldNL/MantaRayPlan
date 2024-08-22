@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj" />
+      <ProjectReference Include="..\Server.DataAccess.DataBase\DataBase.csproj" />
     </ItemGroup>
 
     <ItemGroup>
