@@ -31,6 +31,22 @@ spec:
             timeoutSeconds: 1
             failureThreshold: 3 
           env:
+            - name: Database__Host
+              value: "postgres-ro"
+            - name: Database__Port
+              value: "5432"
+            - name: Database__DbName
+              value: "MantaRayPlan"
+            - name: Database__User
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.secret.name }}
+                  key: username
+            - name: Database__Password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.secret.name }}
+                  key: password      
             - name: OpenTelemetry__LoggerEndpoint
               value: "{{ .Values.logging.seq.host.internal }}"
             - name: OpenTelemetry__LoggerApiKey

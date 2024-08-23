@@ -1,0 +1,115 @@
+{{- $pgadminSecrets := (lookup "v1" "Secret" .Values.namespace .Values.pgadmin.name ) -}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.pgadmin.secret.name }}
+  namespace: {{ .Values.namespace }}
+type: kubernetes.io/basic-auth
+data:
+  username: {{ .Values.pgadmin.username | b64enc }}
+{{- if and $pgadminSecrets $pgadminSecrets.data }}
+  {{- if $pgadminSecrets.data.password }}
+  password: {{ $pgadminSecrets.data.password }}
+  {{- else }}
+  password: {{ "nonExistingKey1234" | b64enc }}
+  {{- end }}
+{{- else }}
+  password: {{ "nonExistingKey1234" | b64enc }}
+{{- end }}
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pgadmin-pv-volume
+  namespace: {{ .Values.namespace }}
+  labels:
+    type: local
+    app: {{ .Values.pgadmin.app }}
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/MantaRayPlan/Pgadmin"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pgadmin-pv-claim
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.pgadmin.app }}
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.pgadmin.deployment }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.pgadmin.app }}
+    name: {{ .Values.pgadmin.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.pgadmin.app }}
+      task: {{ .Values.pgadmin.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.pgadmin.app }}
+        task: {{ .Values.pgadmin.name }}
+    spec:
+      containers:
+        - name: {{ .Values.pgadmin.app }}
+          image: "dpage/pgadmin4:latest"
+          imagePullPolicy: Always
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+          env:
+          - name: PGADMIN_DEFAULT_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.pgadmin.secret.name }}
+                key: username
+          - name: PGADMIN_DEFAULT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.pgadmin.secret.name }}
+                key: password
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: "/var/lib/pgadmin"
+              name: pgadminvolume
+      volumes:
+      - name: pgadminvolume
+        persistentVolumeClaim:
+          claimName: pgadmin-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.pgadmin.loadBalancer }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: {{ .Values.pgadmin.app }}
+    task: {{ .Values.pgadmin.name }}
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

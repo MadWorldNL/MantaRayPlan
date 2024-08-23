@@ -78,3 +78,24 @@ logging:
     secrets:
       name: "seq-secrets"
     firstTimePassword: "QFCKH3NTSBQ5zmsH9DpXTB2YefIavEGJKa4SshKb11AXX8b4o4KPjuo9bd6WBfqDkpxKqzNjaOrCsE49ph369Wx84mIrksnJx5OtRcxAOjff"
+
+database:
+  enabled: true
+  name: postgres
+  size:
+    single: 1Gi
+    combined: 4Gi
+  secret:
+    name: postgres-secret
+
+pgadmin:
+  outsideAccess: 
+    enabled: true
+  app: pgadmin
+  deployment: pgadmin-deployment
+  loadBalancer: "pgadmin-loadbalancer"
+  name: pgadmin
+  username: test@test.nl
+  host: "database.mantarayplan"
+  secret:
+    name: pgadmin-secret

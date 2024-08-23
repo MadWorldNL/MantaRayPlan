@@ -1,20 +1,30 @@
+using MadWorldNL.MantaRayPlan.Extensions;
 using MadWorldNL.MantaRayPlan.OpenTelemetry;
-using Server.Controllers.Api.Grpc.Services;
+using MadWorldNL.MantaRayPlan.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
-                          new OpenTelemetryConfig();
+var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() 
+                            ?? new OpenTelemetryConfig();
 
 builder.AddDefaultOpenTelemetry(openTelemetryConfig);
 
 builder.Services.AddGrpc();
+builder.Services.AddGrpcReflection();
+
+builder.AddDatabase();
+
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
+app.MapGrpcService<MessageBusServiceProxy>();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapGrpcReflectionService();
+}
+
 app.MapHealthChecks("/healthz");
 
 app.MapGet("/",
