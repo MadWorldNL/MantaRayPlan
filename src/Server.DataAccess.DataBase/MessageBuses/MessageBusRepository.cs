@@ -22,6 +22,7 @@ public class MessageBusRepository : IMessageBusRepository
     public async Task<MessageBusStatus?> FindStatusAsync()
     {
         return await _dbContext.MessageBusStatus
+                .OrderBy(s => s.Id)
                 .LastOrDefaultAsync();
     }
 
