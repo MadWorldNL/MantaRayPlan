@@ -36,7 +36,7 @@ spec:
             - name: Database__Port
               value: "5432"
             - name: Database__DbName
-              value: "MantaRayPlan"
+              value: {{ .Values.database.dbName }}
             - name: Database__User
               valueFrom:
                 secretKeyRef:
@@ -53,7 +53,9 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.logging.seq.secrets.name }}
-                  key: apiKeyGrpc       
+                  key: apiKeyGrpc
+            - name: Kestrel__EndpointDefaults__Protocols
+              value: "Http1AndHttp2"       
           ports:
             - containerPort: 8080
 ---
