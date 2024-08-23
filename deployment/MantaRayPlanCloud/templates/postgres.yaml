@@ -59,7 +59,7 @@ spec:
   primaryUpdateStrategy: unsupervised
   bootstrap:
     initdb:
-      database: maintenance
+      database: {{ .Values.database.dbName }}
       owner: app
       secret: 
         name: postgres-secret

@@ -82,6 +82,7 @@ logging:
 database:
   enabled: true
   name: postgres
+  dbName: MantaRayPlan
   size:
     single: 1Gi
     combined: 4Gi

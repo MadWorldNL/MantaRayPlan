@@ -36,7 +36,7 @@ spec:
             - name: Database__Port
               value: "5432"
             - name: Database__DbName
-              value: "MantaRayPlan"
+              value: {{ .Values.database.dbName }}
             - name: Database__User
               valueFrom:
                 secretKeyRef:
