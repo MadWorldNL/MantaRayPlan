@@ -75,7 +75,7 @@ helm install -f environments/values-development.yaml manta-ray-plan-cloud .
 
 Upgrade the cluster when you have a new version:
 ```shell
-helm upgrade -f environments/values-development.yaml manta-ray-plan-cloud .
+    helm upgrade -f environments/values-development.yaml manta-ray-plan-cloud .
 ```
 
 Remove the cluster from Kubernetes:

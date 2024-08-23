@@ -85,6 +85,8 @@ database:
   size:
     single: 1Gi
     combined: 4Gi
+  secret:
+    name: postgres-secret
 
 pgadmin:
   outsideAccess: 

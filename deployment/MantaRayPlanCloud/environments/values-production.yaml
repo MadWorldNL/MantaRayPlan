@@ -1,7 +1,7 @@
 namespace: "manta-ray-plan-production"
 
 image:
-  tag: "v0.4.6"
+  tag: "v0.4.7"
 
 clusterIssuer:
   enabled: true
@@ -30,6 +30,7 @@ logging:
     firstTimePassword: "QFCKH3NTSBQ5zmsH9DpXTB2YefIavEGJKa4SshKb11AXX8b4o4KPjuo9bd6WBfqDkpxKqzNjaOrCsE49ph369Wx84mIrksnJx5OtRcxAOjff"
 
 database:
+  enabled: true
   size:
     single: 10Gi
     combined: 35Gi

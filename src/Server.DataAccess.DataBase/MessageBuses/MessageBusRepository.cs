@@ -2,35 +2,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MadWorldNL.MantaRayPlan.MessageBuses;
 
-public class MessageBusRepository : IMessageBusRepository
+public class MessageBusRepository(MantaRayPlanDbContext dbContext) : IMessageBusRepository
 {
-    private readonly MantaRayPlanDbContext _dbContext;
-
-    public MessageBusRepository(MantaRayPlanDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     public async Task CreateAsync(MessageBusStatus status)
     {
-        await _dbContext.MessageBusStatus
+        await dbContext.MessageBusStatus
                 .AddAsync(status);
         
-        await _dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task<MessageBusStatus?> FindStatusAsync()
     {
-        return await _dbContext.MessageBusStatus
+        return await dbContext.MessageBusStatus
                 .OrderBy(s => s.Id)
                 .LastOrDefaultAsync();
     }
 
     public async Task UpdateAsync(MessageBusStatus status)
     {
-        _dbContext.MessageBusStatus
+        dbContext.MessageBusStatus
             .Update(status);
         
-        await _dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync();
     }
 }
