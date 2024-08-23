@@ -53,7 +53,9 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.logging.seq.secrets.name }}
-                  key: apiKeyGrpc       
+                  key: apiKeyGrpc
+            - name: Kestrel__EndpointDefaults__Protocols
+              value: "Http1AndHttp2"       
           ports:
             - containerPort: 8080
 ---
