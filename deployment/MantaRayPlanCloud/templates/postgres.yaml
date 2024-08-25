@@ -40,5 +40,5 @@ spec:
       resources:
         requests:
           storage: {{ .Values.database.size.single }}
-      storageClassName: postgres-csi
+      storageClassName: {{ .Values.database.storageclass }}
 {{ end }}
