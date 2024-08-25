@@ -98,6 +98,7 @@ sudo microk8s enable helm
 sudo microk8s enable dashboard
 sudo microk8s enable ingress
 sudo microk8s enable cert-manager
+sudo microk8s enable hostpath-storage
 ```
 
 Optional:
