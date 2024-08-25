@@ -17,37 +17,6 @@ data:
   password: {{ "nonExistingKey1234" | b64enc }}
 {{- end }}
 ---
-apiVersion: hostpathprovisioner.kubevirt.io/v1beta1
-kind: HostPathProvisioner
-metadata:
-  name: hostpath-provisioner
-  namespace: hostpath-provisioner
-spec:
-  imagePullPolicy: Always
-  storagePools:
-    - name: "postgres-pool"
-      pvcTemplate:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: {{ .Values.database.size.combined }}
-      path: "/MantaRayPlan/Postgres"
-  workload:
-    nodeSelector:
-      kubernetes.io/os: linux
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: postgres-csi
-  namespace: hostpath-provisioner
-provisioner: kubevirt.io.hostpath-provisioner
-reclaimPolicy: Delete
-volumeBindingMode: WaitForFirstConsumer
-parameters:
-  storagePool: postgres-pool
----
 {{- if .Values.database.enabled }}
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster

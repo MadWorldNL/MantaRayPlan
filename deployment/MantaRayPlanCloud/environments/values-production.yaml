@@ -34,6 +34,7 @@ database:
   size:
     single: 10Gi
     combined: 35Gi
+  storageclass: microk8s-hostpath
 
 pgadmin:
   outsideAccess: 

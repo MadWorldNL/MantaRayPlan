@@ -88,6 +88,7 @@ database:
     combined: 4Gi
   secret:
     name: postgres-secret
+  storageclass: standard
 
 pgadmin:
   outsideAccess: 
