@@ -1,4 +1,4 @@
-{{- $pgadminSecrets := (lookup "v1" "Secret" .Values.namespace .Values.pgadmin.name ) -}}
+{{- $pgadminSecrets := (lookup "v1" "Secret" .Values.namespace .Values.pgadmin.secret.name ) -}}
 apiVersion: v1
 kind: Secret
 metadata:

@@ -1,4 +1,4 @@
-{{- $postgresSecrets := (lookup "v1" "Secret" .Values.namespace .Values.database.name ) -}}
+{{- $postgresSecrets := (lookup "v1" "Secret" .Values.namespace .Values.database.secret.name ) -}}
 apiVersion: v1
 kind: Secret
 metadata:
