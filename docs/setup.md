@@ -35,6 +35,10 @@ Deploy now to kubernetes and wait for the pods to be ready.
 4. Navigate to your account settings page
    1. Change your default password
 
+## PGAdmin
+1. Visit your pgadmin url
+2. Navigate to account tab and select Two-factor authentication
+   1. Enable two-factor authentication
+
 ## Reference
-[Install Guide Cloud Native PG](https://cloudnative-pg.io/documentation/1.23/installation_upgrade/)\
-[Install Hostpath Provisioner](https://github.com/kubevirt/hostpath-provisioner-operator)
+[Install Guide Cloud Native PG](https://cloudnative-pg.io/documentation/1.23/installation_upgrade/)
