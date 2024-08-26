@@ -7,9 +7,13 @@ services:
     build:
       context: .
       dockerfile: Clients.Admin.Bff/Dockerfile
+    environment:
+      - OpenTelemetry__LoggerEndpoint=http://seq:5341
     ports:
       - "8080:8080"
       - "8081:8081"
+    networks:
+      - seq
   admin-web:
     image: ghcr.io/madworldnl/mantarayplan-admin-web:latest
     container_name: admin-web
@@ -28,11 +32,20 @@ services:
       context: .
       dockerfile: Server.Controllers.Api.Grpc/Dockerfile
     depends_on:
+      messagebus:
+        condition: service_healthy
       postgres:
         condition: service_healthy
+    environment:
+      - Database__Host=postgres
+      - OpenTelemetry__LoggerEndpoint=http://seq:5341
     ports:
       - "8084:8080"
       - "8085:8081"
+    networks:
+      - messagebus
+      - postgres
+      - seq
   api-message-bus:
     image: ghcr.io/madworldnl/mantarayplan-api-message-bus:latest
     container_name: api-message-bus
@@ -41,11 +54,20 @@ services:
       context: .
       dockerfile: Server.Controllers.Api.MessageBus/Dockerfile
     depends_on:
+      messagebus:
+        condition: service_healthy
       postgres:
         condition: service_healthy
+    environment:
+      - Database__Host=postgres 
+      - OpenTelemetry__LoggerEndpoint=http://seq:5341
     ports:
       - "8086:8080"
       - "8087:8081"
+    networks:
+      - messagebus
+      - postgres
+      - seq
   viewer-bff:
     image: ghcr.io/madworldnl/mantarayplan-viewer-bff:latest
     container_name: viewer-bff
@@ -53,9 +75,13 @@ services:
     build:
       context: .
       dockerfile: Clients.Viewer.Bff/Dockerfile
+    environment:
+      - OpenTelemetry__LoggerEndpoint=http://seq:5341
     ports:
       - "8088:8080"
       - "8089:8081"
+    networks:
+      - seq
   viewer-web:
     image: ghcr.io/madworldnl/mantarayplan-viewer-web:latest
     container_name: viewer-web
@@ -76,6 +102,8 @@ services:
       - SEQ_FIRSTRUN_ADMINPASSWORDHASH=QFCKH3NTSBQ5zmsH9DpXTB2YefIavEGJKa4SshKb11AXX8b4o4KPjuo9bd6WBfqDkpxKqzNjaOrCsE49ph369Wx84mIrksnJx5OtRcxAOjff
     ports:
       - "5341:80"
+    networks:
+      - seq
     volumes:
       - seq-data:/data
   postgres:
@@ -111,9 +139,32 @@ services:
       - postgres
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+  messagebus:
+    image: rabbitmq:3-management
+    container_name: messagebus
+    hostname: my-rabbit
+    environment:
+      - "RABBITMQ_DEFAULT_USER=development"
+      - "RABBITMQ_DEFAULT_PASS=Secret1234"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - messagebus
+    volumes:
+      - "rabbitmq-data:/var/lib/rabbitmq"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
 volumes:
   postgres-data:
   pgadmin-data:
+  rabbitmq-data:
   seq-data:
 networks:
+  messagebus:
   postgres:
+  seq:
