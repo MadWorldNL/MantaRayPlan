@@ -38,6 +38,7 @@
     <ItemGroup>
       <ProjectReference Include="..\MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj" />
       <ProjectReference Include="..\Server.DataAccess.DataBase\DataBase.csproj" />
+      <ProjectReference Include="..\Server.Logic.Queries\Queries.csproj" />
     </ItemGroup>
 
 

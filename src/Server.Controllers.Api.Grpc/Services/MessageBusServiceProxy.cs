@@ -2,32 +2,45 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MadWorldNL.MantaRayPlan.MessageBuses;
 using MantaRayPlan;
+using MassTransit;
 
 namespace MadWorldNL.MantaRayPlan.Services;
 
-public class MessageBusServiceProxy(IMessageBusRepository messageBusRepository, ILogger<MessageBusServiceProxy> logger)
-        : MessageBusService.MessageBusServiceBase
+public class MessageBusServiceProxy(
+    IRequestClient<GetMessageBusStatus> getMessageBusStatusClient,
+    ILogger<MessageBusServiceProxy> logger)
+    : MessageBusService.MessageBusServiceBase
 {
     public override async Task<MessageBusStatusReply> GetStatus(Empty request, ServerCallContext context)
     {
         try
         {
-            var status = await messageBusRepository.FindStatusAsync() ?? new MessageBusStatus();
-            
+            var status =
+                await getMessageBusStatusClient.GetResponse<MessageBusStatus>(new GetMessageBusStatus());
+
             return new MessageBusStatusReply()
             {
-                Counter = status.Count
+                Counter = status.Message.Count,
             };
         }
-        catch (Exception ex)
+        catch (RequestFaultException exception) when (exception.Fault?.Exceptions.Any(ex =>
+                                                          ex.InnerException?.ExceptionType ==
+                                                          "Npgsql.NpgsqlException") ?? false)
         {
-            const string message = "Database error";
-            
-            logger.LogError(ex, message);
-            
+            logger.LogError(exception, "Unable to connect with database");
+
             return new MessageBusStatusReply()
             {
-                Message = message
+                Message = "Unable to connect with database"
+            };
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, "Unknown error");
+
+            return new MessageBusStatusReply()
+            {
+                Message = "Unknown error"
             };
         }
     }

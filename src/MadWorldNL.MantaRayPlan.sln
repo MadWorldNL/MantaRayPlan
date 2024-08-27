@@ -113,6 +113,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions", "Server.Logic.F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.MessageBus.IntegrationTests", "Server.Controllers.Api.MessageBus.IntegrationTests\Api.MessageBus.IntegrationTests.csproj", "{78883E90-1F9F-4FA4-A1BC-573AF4AF432B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queries", "Server.Logic.Queries\Queries.csproj", "{4ED4374B-83B4-43C5-8E48-F9C9179AF077}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,7 @@ Global
 		{1803C1EF-6193-4CE5-A37A-16F920F2388D} = {A7B2EEF8-045E-4473-9DE2-6452F5E14CE3}
 		{3952C3C4-FB97-4441-9608-A5B7C3BC4E53} = {A7B2EEF8-045E-4473-9DE2-6452F5E14CE3}
 		{78883E90-1F9F-4FA4-A1BC-573AF4AF432B} = {FCC26FAC-D27A-4E9C-97AB-225E3131FA52}
+		{4ED4374B-83B4-43C5-8E48-F9C9179AF077} = {A7B2EEF8-045E-4473-9DE2-6452F5E14CE3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C3AFAE1F-DDC9-4DB1-931D-1B934F9C9DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -224,5 +227,9 @@ Global
 		{78883E90-1F9F-4FA4-A1BC-573AF4AF432B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78883E90-1F9F-4FA4-A1BC-573AF4AF432B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78883E90-1F9F-4FA4-A1BC-573AF4AF432B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED4374B-83B4-43C5-8E48-F9C9179AF077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED4374B-83B4-43C5-8E48-F9C9179AF077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED4374B-83B4-43C5-8E48-F9C9179AF077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED4374B-83B4-43C5-8E48-F9C9179AF077}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

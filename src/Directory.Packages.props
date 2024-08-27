@@ -2,6 +2,7 @@
   <ItemGroup>
     <PackageVersion Include="Grpc.AspNetCore.Server.Reflection" Version="2.65.0" />
     <PackageVersion Include="MassTransit" Version="8.2.5" />
+    <PackageVersion Include="MassTransit.Abstractions" Version="8.2.5" />
     <PackageVersion Include="MassTransit.RabbitMQ" Version="8.2.5" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.8" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
