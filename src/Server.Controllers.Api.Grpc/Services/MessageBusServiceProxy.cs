@@ -7,18 +7,19 @@ using MassTransit;
 namespace MadWorldNL.MantaRayPlan.Services;
 
 public class MessageBusServiceProxy(
-    IRequestClient<GetMessageBusStatus> getMessageBusStatusClient,
+    IRequestClient<MessageBusStatusQuery> getMessageBusStatusClient,
+    ISendEndpointProvider sendEndpointProvider,
     ILogger<MessageBusServiceProxy> logger)
     : MessageBusService.MessageBusServiceBase
 {
-    public override async Task<MessageBusStatusReply> GetStatus(Empty request, ServerCallContext context)
+    public override async Task<GetMessageBusStatusReply> GetStatus(Empty request, ServerCallContext context)
     {
         try
         {
             var status =
-                await getMessageBusStatusClient.GetResponse<MessageBusStatus>(new GetMessageBusStatus());
+                await getMessageBusStatusClient.GetResponse<MessageBusStatus>(new MessageBusStatusQuery(), context.CancellationToken);
 
-            return new MessageBusStatusReply()
+            return new GetMessageBusStatusReply()
             {
                 Counter = status.Message.Count,
             };
@@ -29,7 +30,7 @@ public class MessageBusServiceProxy(
         {
             logger.LogError(exception, "Unable to connect with database");
 
-            return new MessageBusStatusReply()
+            return new GetMessageBusStatusReply()
             {
                 Message = "Unable to connect with database"
             };
@@ -38,10 +39,17 @@ public class MessageBusServiceProxy(
         {
             logger.LogError(exception, "Unknown error");
 
-            return new MessageBusStatusReply()
+            return new GetMessageBusStatusReply()
             {
                 Message = "Unknown error"
             };
         }
+    }
+
+    public override async Task<PostMessageBusStatusReply> PostStatus(Empty request, ServerCallContext context)
+    {
+        await sendEndpointProvider.Send(new MessageBusStatusCommand("Test"), context.CancellationToken);
+
+        return new PostMessageBusStatusReply();
     }
 }

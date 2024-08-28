@@ -21,6 +21,8 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
     
+    x.AddConsumer<MessageBusStatusCommandConsumer>();
+    
     x.UsingRabbitMq((context,cfg) =>
     {
         var messageBusSettings  = builder.Configuration.GetSection(MessageBusSettings.Key)

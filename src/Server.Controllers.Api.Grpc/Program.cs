@@ -22,10 +22,10 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
     
-    x.AddConsumer<GetMessageBusStatusConsumer>()
-        .Endpoint(e => e.Name = nameof(GetMessageBusStatus));
+    x.AddConsumer<MessageBusStatusQueryConsumer>()
+        .Endpoint(e => e.Name = GetName<MessageBusStatusQuery>());
     
-    x.AddRequestClient<GetMessageBusStatus>(new Uri($"exchange:{nameof(GetMessageBusStatus)}"));
+    x.AddRequestClient<MessageBusStatusQuery>(new Uri(GetExchangeName<MessageBusStatusQuery>()));
     
     x.UsingRabbitMq((context,cfg) =>
     {
@@ -38,6 +38,8 @@ builder.Services.AddMassTransit(x =>
         });
         
         cfg.ConfigureEndpoints(context);
+        
+       EndpointConvention.Map<MessageBusStatusCommand>(new Uri(GetExchangeName<MessageBusStatusCommand>()));
     });
 });
 
@@ -58,4 +60,8 @@ app.MapGet("/",
 
 await app.RunAsync();
 
-public abstract partial class Program { }
+public abstract partial class Program
+{
+    private static string GetExchangeName<T>() => $"exchange:{GetName<T>()}";
+    private static string GetName<T>() => $"{typeof(T).Namespace}:{typeof(T).Name}";
+}

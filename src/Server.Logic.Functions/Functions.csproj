@@ -5,4 +5,12 @@
         <AssemblyName>MadWorldNL.MantaRayPlan.Logic.Functions</AssemblyName>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MassTransit.Abstractions" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Server.Logic.Domain\Domain.csproj" />
+    </ItemGroup>
+
 </Project>

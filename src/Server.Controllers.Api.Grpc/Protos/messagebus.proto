@@ -7,10 +7,15 @@ package messagebus;
 import "google/protobuf/empty.proto";
 
 service MessageBusService {
-  rpc GetStatus (google.protobuf.Empty) returns (MessageBusStatusReply);
+  rpc GetStatus (google.protobuf.Empty) returns (GetMessageBusStatusReply);
+  rpc PostStatus (google.protobuf.Empty) returns (PostMessageBusStatusReply);
 }
 
-message MessageBusStatusReply {
+message GetMessageBusStatusReply {
   string message = 1;
   int32 counter = 2;
+}
+
+message PostMessageBusStatusReply {
+  string message = 1;
 }
