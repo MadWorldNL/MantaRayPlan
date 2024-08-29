@@ -1,3 +1,8 @@
+using MadWorldNL.MantaRayPlan.Process;
+
 namespace MadWorldNL.MantaRayPlan.MessageBuses;
 
-public record MessageBusStatusEvent(int Count);
+public class MessageBusStatusEvent() : IEvent
+{
+    public int Count { get; set; }
+}

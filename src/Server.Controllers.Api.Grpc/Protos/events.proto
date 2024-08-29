@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "MantaRayPlan";
+
+package events;
+
+import "google/protobuf/empty.proto";
+
+service EventService {
+  rpc Subscribe (google.protobuf.Empty) returns (stream newEvent);
+}
+
+message newEvent {
+  string type = 1;
+  string json = 2;
+}

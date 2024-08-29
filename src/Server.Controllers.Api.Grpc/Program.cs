@@ -21,6 +21,8 @@ builder.Services.AddHealthChecks();
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
+
+    x.AddConsumer<GrpcEventPusherConsumer<MessageBusStatusEvent>>();
     
     x.AddConsumer<MessageBusStatusQueryConsumer>()
         .Endpoint(e => e.Name = GetName<MessageBusStatusQuery>());
@@ -45,6 +47,7 @@ builder.Services.AddMassTransit(x =>
 
 var app = builder.Build();
 
+app.MapGrpcService<EventServiceProxy>();
 app.MapGrpcService<MessageBusServiceProxy>();
 
 if (app.Environment.IsDevelopment())

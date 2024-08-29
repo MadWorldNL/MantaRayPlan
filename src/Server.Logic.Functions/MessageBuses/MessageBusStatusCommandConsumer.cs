@@ -26,6 +26,9 @@ public class MessageBusStatusCommandConsumer : IConsumer<MessageBusStatusCommand
         
         await _messageBusRepository.UpdateAsync(status);
 
-        await context.Publish(new MessageBusStatusEvent(status.Count));
+        await context.Publish(new MessageBusStatusEvent
+        {
+            Count = status.Count
+        });
     }
 }
