@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "MantaRayPlan";
+option csharp_namespace = "MadWorldNL.MantaRayPlan.Api";
 
 package events;
 

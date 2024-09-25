@@ -7,11 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\events.proto" GrpcServices="Server"/>
-        <Protobuf Include="Protos\messagebus.proto" GrpcServices="Server"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" />
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection" />
         <PackageReference Include="MassTransit" />
@@ -37,6 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ClientSdk.Api.Grpc\ClientSdk.Api.Grpc.csproj" />
       <ProjectReference Include="..\MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj" />
       <ProjectReference Include="..\Server.DataAccess.DataBase\DataBase.csproj" />
       <ProjectReference Include="..\Server.Logic.Functions\Functions.csproj" />

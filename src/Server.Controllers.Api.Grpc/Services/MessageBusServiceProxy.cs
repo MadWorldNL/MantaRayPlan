@@ -1,7 +1,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using MadWorldNL.MantaRayPlan.Api;
 using MadWorldNL.MantaRayPlan.MessageBuses;
-using MantaRayPlan;
 using MassTransit;
 
 namespace MadWorldNL.MantaRayPlan.Services;
