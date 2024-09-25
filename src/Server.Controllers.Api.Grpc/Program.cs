@@ -1,4 +1,6 @@
+using MadWorldNL.MantaRayPlan.Events;
 using MadWorldNL.MantaRayPlan.Extensions;
+using MadWorldNL.MantaRayPlan.MassTransit;
 using MadWorldNL.MantaRayPlan.MessageBuses;
 using MadWorldNL.MantaRayPlan.OpenTelemetry;
 using MadWorldNL.MantaRayPlan.Services;
@@ -22,7 +24,7 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
 
-    x.AddConsumer<GrpcEventPusherConsumer<MessageBusStatusEvent>>();
+    x.AddConsumer<EventPusherConsumer<MessageBusStatusEvent>>();
     
     x.AddConsumer<MessageBusStatusQueryConsumer>()
         .Endpoint(e => e.Name = GetName<MessageBusStatusQuery>());

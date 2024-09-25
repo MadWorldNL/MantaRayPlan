@@ -10,6 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ClientSdk.Api.MessageBus\ClientSdk.Api.MessageBus.csproj" />
       <ProjectReference Include="..\Server.Logic.Domain\Domain.csproj" />
     </ItemGroup>
 

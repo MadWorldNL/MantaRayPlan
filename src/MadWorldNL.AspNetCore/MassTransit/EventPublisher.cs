@@ -1,4 +1,6 @@
-namespace MadWorldNL.MantaRayPlan.Process;
+using MadWorldNL.MantaRayPlan.Events;
+
+namespace MadWorldNL.MantaRayPlan.MassTransit;
 
 public static class EventPublisher
 {

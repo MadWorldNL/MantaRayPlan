@@ -2,6 +2,7 @@ using System.Threading.RateLimiting;
 using MadWorldNL.MantaRayPlan.Api;
 using MadWorldNL.MantaRayPlan.Configurations;
 using MadWorldNL.MantaRayPlan.Endpoints;
+using MadWorldNL.MantaRayPlan.Hubs;
 using MadWorldNL.MantaRayPlan.OpenTelemetry;
 using Microsoft.AspNetCore.RateLimiting;
 
@@ -12,8 +13,13 @@ var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.K
 
 builder.AddDefaultOpenTelemetry(openTelemetryConfig);
 
+builder.Services.AddSignalR();
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSignalRSwaggerGen();
+});
 
 builder.Services.AddHealthChecks();
 
@@ -57,6 +63,8 @@ app.Use(async (context, next) =>
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.MapHub<EventsHub>("/Events");
 
 app.MapHealthChecks("/healthz");
 

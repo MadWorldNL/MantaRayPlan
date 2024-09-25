@@ -2,7 +2,8 @@ using System.Text.Json;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MadWorldNL.MantaRayPlan.Api;
-using MadWorldNL.MantaRayPlan.Process;
+using MadWorldNL.MantaRayPlan.Events;
+using MadWorldNL.MantaRayPlan.MassTransit;
 
 namespace MadWorldNL.MantaRayPlan.Services;
 

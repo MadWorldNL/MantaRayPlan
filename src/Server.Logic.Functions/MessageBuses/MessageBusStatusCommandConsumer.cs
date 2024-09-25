@@ -1,3 +1,4 @@
+using MadWorldNL.MantaRayPlan.Events;
 using MassTransit;
 
 namespace MadWorldNL.MantaRayPlan.MessageBuses;

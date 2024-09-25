@@ -1,9 +1,9 @@
-using MadWorldNL.MantaRayPlan.Process;
+using MadWorldNL.MantaRayPlan.Events;
 using MassTransit;
 
-namespace MadWorldNL.MantaRayPlan.MessageBuses;
+namespace MadWorldNL.MantaRayPlan.MassTransit;
 
-public class GrpcEventPusherConsumer<TMessage> : IConsumer<TMessage> where TMessage : class, IEvent
+public class EventPusherConsumer<TMessage> : IConsumer<TMessage> where TMessage : class, IEvent
 {
     public Task Consume(ConsumeContext<TMessage> context)
     {
