@@ -16,5 +16,11 @@ public static class MessageBusEndpoints
             var status = client.GetStatus(new Empty());
             return new GetStatusResponse(status.Message, status.Counter);
         });
+        
+        messageBusEndpoints.MapPost("/Status", ([FromServices] MessageBusService.MessageBusServiceClient client) =>
+        {
+            var response = client.PostStatus(new Empty());
+            return new PostStatusResponse(response.Message);
+        });
     }
 }
