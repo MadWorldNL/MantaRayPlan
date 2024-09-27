@@ -41,6 +41,13 @@ builder.Services.AddMassTransit(x =>
             h.Password(messageBusSettings.Password);
         });
         
+        var appName = typeof(Program).Assembly.GetName().Name!;
+        cfg.ReceiveEndpoint(EventPusherConsumer<MessageBusStatusEvent>.GetQueueName(appName, nameof(MessageBusStatusEvent)), 
+            e =>
+            {
+                e.ConfigureConsumer<EventPusherConsumer<MessageBusStatusEvent>>(context);
+            });
+        
         cfg.ConfigureEndpoints(context);
         
        EndpointConvention.Map<MessageBusStatusCommand>(new Uri(GetExchangeName<MessageBusStatusCommand>()));

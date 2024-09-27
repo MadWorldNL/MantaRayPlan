@@ -11,4 +11,6 @@ public class EventPusherConsumer<TMessage> : IConsumer<TMessage> where TMessage 
 
         return Task.CompletedTask;
     }
+
+    public static string GetQueueName(string backend, string messageType) => $"{backend}_{nameof(EventPusherConsumer<TMessage>)}_{messageType}";
 }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace MadWorldNL.MantaRayPlan.Hubs;
 
-public class EventHandlerService
+public sealed class EventHandlerService : IDisposable
 {
     private readonly IHubContext<EventsHub> _context;
 
@@ -18,5 +18,11 @@ public class EventHandlerService
     private void SendEventToClient(IEvent newEvent)
     {
         _context.Clients.All.SendAsync("NewEvent", newEvent);
+    }
+
+    public void Dispose()
+    {
+        EventPublisher.OnMessageReceived -= SendEventToClient;
+        GC.SuppressFinalize(this);
     }
 }
