@@ -2,8 +2,11 @@ using System.Threading.RateLimiting;
 using MadWorldNL.MantaRayPlan.Api;
 using MadWorldNL.MantaRayPlan.Configurations;
 using MadWorldNL.MantaRayPlan.Endpoints;
+using MadWorldNL.MantaRayPlan.Events;
 using MadWorldNL.MantaRayPlan.Hubs;
+using MadWorldNL.MantaRayPlan.MassTransit;
 using MadWorldNL.MantaRayPlan.OpenTelemetry;
+using MassTransit;
 using Microsoft.AspNetCore.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,7 @@ var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.K
 builder.AddDefaultOpenTelemetry(openTelemetryConfig);
 
 builder.Services.AddSignalR();
+builder.Services.AddSingleton<EventHandlerService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -22,6 +26,25 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddHealthChecks();
+
+builder.Services.AddMassTransit(x =>
+{
+    x.SetKebabCaseEndpointNameFormatter();
+
+    x.AddConsumer<EventPusherConsumer<MessageBusStatusEvent>>();
+    
+    x.UsingRabbitMq((context,cfg) =>
+    {
+        var messageBusSettings  = builder.Configuration.GetSection(MessageBusSettings.Key).Get<MessageBusSettings>()!;
+        
+        cfg.Host(messageBusSettings.Host, messageBusSettings.Port, "/", h => {
+            h.Username(messageBusSettings.Username);
+            h.Password(messageBusSettings.Password);
+        });
+        
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 var apiSettingsSection = builder.Configuration.GetSection(ApiSettings.Key);
 builder.Services.AddOptions<ApiSettings>()

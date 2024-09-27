@@ -2,6 +2,7 @@
 
 using MadWorldNL.MantaRayPlan;
 using MadWorldNL.MantaRayPlan.Extensions;
+using MadWorldNL.MantaRayPlan.MassTransit;
 using MadWorldNL.MantaRayPlan.MessageBuses;
 using MadWorldNL.MantaRayPlan.OpenTelemetry;
 using MassTransit;

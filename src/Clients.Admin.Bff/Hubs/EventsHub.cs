@@ -1,25 +1,9 @@
-using MadWorldNL.MantaRayPlan.Events;
-using MadWorldNL.MantaRayPlan.MassTransit;
 using Microsoft.AspNetCore.SignalR;
+using SignalRSwaggerGen.Attributes;
 
 namespace MadWorldNL.MantaRayPlan.Hubs;
 
-public class EventsHub : Hub
+[SignalRHub]
+public class EventsHub(EventHandlerService _) : Hub
 {
-    public EventsHub()
-    {
-        EventPublisher.OnMessageReceived += SendEventToClient;
-    }
-    
-    void SendEventToClient(IEvent newEvent)
-    {
-        
-    }
-
-    public new void Dispose()
-    {
-        EventPublisher.OnMessageReceived -= SendEventToClient;
-        
-        base.Dispose();
-    }
 }

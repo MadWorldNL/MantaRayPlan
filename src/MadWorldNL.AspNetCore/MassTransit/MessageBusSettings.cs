@@ -1,4 +1,4 @@
-namespace MadWorldNL.MantaRayPlan.MessageBuses;
+namespace MadWorldNL.MantaRayPlan.MassTransit;
 
 public class MessageBusSettings
 {
