@@ -20,6 +20,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Clients.DefaultStyle\DefaultStyle.csproj" />
+      <ProjectReference Include="..\ClientSdk.Admin.Bff\ClientSdk.Admin.Bff.csproj" />
     </ItemGroup>
 
     <ItemGroup>
