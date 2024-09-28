@@ -19,6 +19,13 @@ public class MessageBusService(IHttpClientFactory clientFactory) : IMessageBusSe
 
     public async Task<PostStatusResponse> PostNewStatusAsync()
     {
-        return new PostStatusResponse("");
+        var response = await _client.PostAsJsonAsync($"{EndpointSingular}/Status", "{}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            return await response.Content.ReadFromJsonAsync<PostStatusResponse>() ?? new PostStatusResponse("No Response");
+        }
+        
+        return new PostStatusResponse("IsFailedStatusCode");
     }
 }

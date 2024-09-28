@@ -7,6 +7,11 @@
 @if (_isLoaded)
 {
     <p>status counter: @_counter</p>
+    <p>
+        <button @onclick="UpdateStatus">
+            Set new status
+        </button>
+    </p>
 }
 
 @code {
@@ -20,5 +25,10 @@
         _isLoaded = true;
         
         await base.OnInitializedAsync();
+    }
+
+    private async Task UpdateStatus()
+    {
+        await Service.PostNewStatusAsync();
     }
 }
