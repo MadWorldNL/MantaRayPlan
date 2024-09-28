@@ -9,7 +9,20 @@ using MadWorldNL.MantaRayPlan.OpenTelemetry;
 using MassTransit;
 using Microsoft.AspNetCore.RateLimiting;
 
+const string corsName = "DefaultCors";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsName,
+        policy =>
+        {
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+            policy.AllowAnyOrigin();
+        });
+});
 
 var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
                             new OpenTelemetryConfig();
@@ -76,6 +89,7 @@ builder.Services.AddRateLimiter(rl => rl
 
 var app = builder.Build();
 
+app.UseCors(corsName);
 app.UseRateLimiter();
 
 // Security Headers

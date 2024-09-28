@@ -1,15 +1,26 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using MadWorldNL.MantaRayPlan;
-using MadWorldNL.MantaRayPlan.Events;
 using MadWorldNL.MantaRayPlan.Extensions;
 using MadWorldNL.MantaRayPlan.MassTransit;
 using MadWorldNL.MantaRayPlan.MessageBuses;
 using MadWorldNL.MantaRayPlan.OpenTelemetry;
 using MassTransit;
-using MassTransit.Transports.Fabric;
+
+const string corsName = "DefaultCors";
 
 var builder = WebApplication.CreateBuilder();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsName,
+        policy =>
+        {
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+            policy.AllowAnyOrigin();
+        });
+});
 
 var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
                             new OpenTelemetryConfig();

@@ -4,6 +4,6 @@ namespace MadWorldNL.MantaRayPlan.Web.Services.MessageBuses;
 
 public interface IMessageBusService
 {
-    GetStatusResponse GetStatus();
-    PostStatusResponse PostNewStatus();
+    Task<GetStatusResponse> GetStatusAsync();
+    Task<PostStatusResponse> PostNewStatusAsync();
 }

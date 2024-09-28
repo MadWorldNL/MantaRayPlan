@@ -6,7 +6,20 @@ using MadWorldNL.MantaRayPlan.OpenTelemetry;
 using MadWorldNL.MantaRayPlan.Services;
 using MassTransit;
 
+const string corsName = "DefaultCors";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsName,
+        policy =>
+        {
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+            policy.AllowAnyOrigin();
+        });
+});
 
 var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() 
                             ?? new OpenTelemetryConfig();
@@ -55,6 +68,7 @@ builder.Services.AddMassTransit(x =>
 });
 
 var app = builder.Build();
+app.UseCors(corsName);
 
 app.MapGrpcService<EventServiceProxy>();
 app.MapGrpcService<MessageBusServiceProxy>();
