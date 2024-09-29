@@ -72,7 +72,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "code", "code", "{941D883C-3
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
-		docker-compose.env = docker-compose.env
 		docker-compose.yml = docker-compose.yml
 		Nuget.Config = Nuget.Config
 	EndProjectSection

@@ -7,12 +7,18 @@ services:
     build:
       context: .
       dockerfile: Clients.Admin.Bff/Dockerfile
+    depends_on:
+      messagebus:
+        condition: service_healthy
     environment:
+      - Api__Address=http://api-grpc:8080
       - OpenTelemetry__LoggerEndpoint=http://seq:5341
+      - MessageBus__Host=messagebus
     ports:
       - "8080:8080"
       - "8081:8081"
     networks:
+      - messagebus
       - seq
   admin-web:
     image: ghcr.io/madworldnl/mantarayplan-admin-web:latest
@@ -24,6 +30,9 @@ services:
     ports:
       - "8082:80"
       - "8083:443"
+    volumes:
+      - ./docker/Clients.Admin.Web/appsettings.json:/usr/share/nginx/html/appsettings.json
+      - ./docker/Clients.Admin.Web/default.conf:/etc/nginx/conf.d/default.conf
   api-grpc:
     image: ghcr.io/madworldnl/mantarayplan-api-grpc:latest
     container_name: api-grpc
@@ -39,6 +48,7 @@ services:
     environment:
       - Database__Host=postgres
       - OpenTelemetry__LoggerEndpoint=http://seq:5341
+      - MessageBus__Host=messagebus
     ports:
       - "8084:8080"
       - "8085:8081"
@@ -61,6 +71,7 @@ services:
     environment:
       - Database__Host=postgres 
       - OpenTelemetry__LoggerEndpoint=http://seq:5341
+      - MessageBus__Host=messagebus
     ports:
       - "8086:8080"
       - "8087:8081"
@@ -76,11 +87,14 @@ services:
       context: .
       dockerfile: Clients.Viewer.Bff/Dockerfile
     environment:
+      - Api__Address=http://api-grpc:8084
       - OpenTelemetry__LoggerEndpoint=http://seq:5341
+      - MessageBus__Host=messagebus
     ports:
       - "8088:8080"
       - "8089:8081"
     networks:
+      - messagebus
       - seq
   viewer-web:
     image: ghcr.io/madworldnl/mantarayplan-viewer-web:latest
