@@ -2,8 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <AssemblyName>MadWorldNL.MantaRayPlan.ClientSdk.Admin.Bff</AssemblyName>
     </PropertyGroup>
 
 </Project>

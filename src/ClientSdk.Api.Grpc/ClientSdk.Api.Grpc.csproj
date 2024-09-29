@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <AssemblyName>MadWorldNL.MantaRayPlan.ClientSdk.Api.Grpc</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
