@@ -101,3 +101,14 @@ pgadmin:
   host: "database.mantarayplan"
   secret:
     name: pgadmin-secret
+
+messageBus:
+  app: rabbitmq
+  deployment: rabbitmq-deployment
+  loadBalancer: "rabbitmq-loadbalancer"
+  image: rabbitmq
+  tag: 3-management
+  name: rabbitmq
+  secret:
+    name: rabbitmq-secret
+
