@@ -1,5 +1,6 @@
 using MadWorldNL.MantaRayPlan.Web;
 using MadWorldNL.MantaRayPlan.Web.Configurations;
+using MadWorldNL.MantaRayPlan.Web.Services.Events;
 using MadWorldNL.MantaRayPlan.Web.Services.MessageBuses;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -21,5 +22,6 @@ builder.Services.AddHttpClient(ApiTypes.AdminBff, (serviceProvider, client) =>
     });
 
 builder.Services.AddScoped<IMessageBusService, MessageBusService>();
+builder.Services.AddSingleton<EventsService>();
 
 await builder.Build().RunAsync();

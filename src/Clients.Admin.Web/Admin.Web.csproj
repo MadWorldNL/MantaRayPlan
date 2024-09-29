@@ -10,6 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" />
         <PackageReference Include="Microsoft.Extensions.Http" />
     </ItemGroup>
 
@@ -22,6 +23,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Clients.DefaultStyle\DefaultStyle.csproj" />
       <ProjectReference Include="..\ClientSdk.Admin.Bff\ClientSdk.Admin.Bff.csproj" />
+      <ProjectReference Include="..\ClientSdk.Api.MessageBus\ClientSdk.Api.MessageBus.csproj" />
     </ItemGroup>
 
     <ItemGroup>

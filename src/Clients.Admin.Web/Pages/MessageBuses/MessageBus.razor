@@ -1,7 +1,10 @@
+@using MadWorldNL.MantaRayPlan.Events
+@using MadWorldNL.MantaRayPlan.Web.Services.Events
 @using MadWorldNL.MantaRayPlan.Web.Services.MessageBuses
 @page "/MessageBus"
 
-@inject IMessageBusService Service;
+@inject IMessageBusService MessageBusService;
+@inject EventsService EventsService
 
 <h1>Message Bus Test Page</h1>
 @if (_isLoaded)
@@ -16,19 +19,28 @@
 
 @code {
     private bool _isLoaded;
-    private int _counter = 0;
+    private int _counter;
 
     protected override async Task OnInitializedAsync()
     {
-        var status = await Service.GetStatusAsync();
+        var status = await MessageBusService.GetStatusAsync();
         _counter = status.counter;
         _isLoaded = true;
+
+        EventsService.EventReceived += NewEventReceived;
         
+        await EventsService.StartAsync();
         await base.OnInitializedAsync();
+    }
+
+    private void NewEventReceived(MessageBusStatusEvent @event)
+    {
+        _counter = @event.Count;
+        StateHasChanged();
     }
 
     private async Task UpdateStatus()
     {
-        await Service.PostNewStatusAsync();
+        await MessageBusService.PostNewStatusAsync();
     }
 }
