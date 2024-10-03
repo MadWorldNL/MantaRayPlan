@@ -1,11 +1,12 @@
-
 using System.Net;
+using MadWorldNL.MantaRayPlan.Base;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Shouldly;
 
-namespace MadWorldNL.MantaRayPlan;
+namespace MadWorldNL.MantaRayPlan.Endpoints;
 
-public class HealthCheckTests(WebApplicationFactory<Program> factory) : IClassFixture<WebApplicationFactory<Program>>
+[CollectionDefinition(TestDefinitions.Default)]
+public class HealthCheckTests(MessageBusFactory factory) : IClassFixture<MessageBusFactory>
 {
     [Fact]
     public async Task Healthz_GivenEmptyRequest_ShouldBeHealthy()
