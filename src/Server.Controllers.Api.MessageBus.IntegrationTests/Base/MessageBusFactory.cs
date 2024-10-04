@@ -1,7 +1,6 @@
 using MassTransit;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Testcontainers.PostgreSql;
 using Testcontainers.RabbitMq;
@@ -61,6 +60,8 @@ public class MessageBusFactory : WebApplicationFactory<Program>, IAsyncLifetime
 
         builder.ConfigureServices(services =>
         {
+            // For more info about testing message bus:
+            // https://masstransit.io/documentation/concepts/testing
             services.AddMassTransitTestHarness();
         });
         
