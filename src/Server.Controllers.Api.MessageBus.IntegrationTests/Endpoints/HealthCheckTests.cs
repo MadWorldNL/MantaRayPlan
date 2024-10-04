@@ -1,5 +1,7 @@
 using System.Net;
 using MadWorldNL.MantaRayPlan.Base;
+using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 
 namespace MadWorldNL.MantaRayPlan.Endpoints;
@@ -12,7 +14,7 @@ public class HealthCheckTests(MessageBusFactory factory) : IAsyncLifetime
     {
         // Arrange
         var client = factory.CreateClient();
-
+        
         // Act
         var response = await client.GetAsync("/healthz");
 
