@@ -1,22 +1,19 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Testcontainers.PostgreSql;
 
 namespace MadWorldNL.MantaRayPlan.Base;
 
-public class MessageBusFactory : WebApplicationFactory<Program>
+public class MessageBusFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
     private const string DbName = "MantaRayPlan";
     private const string DbUser = "postgres";
-    private const string DbPassword = "Password";
+    private const string DbPassword = "Password1234!";
     
     private PostgreSqlContainer? _postgreSqlContainer;
-
-    public MessageBusFactory()
-    {
-        InitializeAsync().GetAwaiter().GetResult();
-    }
     
     public async Task InitializeAsync()
     {
@@ -28,21 +25,28 @@ public class MessageBusFactory : WebApplicationFactory<Program>
             .Build();
         
         await _postgreSqlContainer.StartAsync();
+    }
 
-    }
-    
-    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    protected override IHost CreateHost(IHostBuilder builder)
     {
-        builder.UseSetting("Database__Host", _postgreSqlContainer!.Hostname);
-        builder.UseSetting("Database__Port", _postgreSqlContainer.GetMappedPublicPort(5432).ToString());
-        builder.UseSetting("Database__DbName", DbName);
-        builder.UseSetting("Database__User", DbUser);
-        builder.UseSetting("Database__Password", DbPassword);
+        var newSettings = new Dictionary<string, string>
+        {
+            ["Database:Host"] = _postgreSqlContainer!.Hostname,
+            ["Database:Port"] = _postgreSqlContainer.GetMappedPublicPort(5432).ToString(),
+            ["Database:DbName"] = DbName,
+            ["Database:User"] = DbUser,
+            ["Database:Password"] = DbPassword
+        };
         
-        base.ConfigureWebHost(builder);
+        builder.ConfigureHostConfiguration(config =>
+        {
+            config.AddInMemoryCollection(newSettings!);
+        });
+        
+        return base.CreateHost(builder);
     }
     
-    public override async ValueTask DisposeAsync()
+    public new async Task DisposeAsync()
     {
         if (_postgreSqlContainer is not null)
         {

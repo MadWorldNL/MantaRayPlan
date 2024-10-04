@@ -1,12 +1,11 @@
 using System.Net;
 using MadWorldNL.MantaRayPlan.Base;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Shouldly;
 
 namespace MadWorldNL.MantaRayPlan.Endpoints;
 
-[CollectionDefinition(TestDefinitions.Default)]
-public class HealthCheckTests(MessageBusFactory factory) : IClassFixture<MessageBusFactory>
+[Collection(TestDefinitions.Default)]
+public class HealthCheckTests(MessageBusFactory factory) : IAsyncLifetime
 {
     [Fact]
     public async Task Healthz_GivenEmptyRequest_ShouldBeHealthy()
@@ -20,4 +19,8 @@ public class HealthCheckTests(MessageBusFactory factory) : IClassFixture<Message
         // Assert
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
+
+    public Task InitializeAsync() => Task.CompletedTask;
+
+    public Task DisposeAsync() => factory.DisposeAsync();
 }
