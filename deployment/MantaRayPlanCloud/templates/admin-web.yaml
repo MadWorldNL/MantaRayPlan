@@ -59,6 +59,13 @@ spec:
         - name: {{ .Values.admin.web.app }}
           image: "{{ .Values.admin.web.image }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              memory: "500Mi"
+            limits:
+              ephemeral-storage: "2Gi"
+              memory: "1Gi"
           livenessProbe:
             httpGet:
               path: /healthz.txt

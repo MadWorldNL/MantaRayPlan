@@ -22,6 +22,13 @@ spec:
         - name: {{ .Values.viewer.bff.app }}
           image: "{{ .Values.viewer.bff.image }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              memory: "1Gi"
+            limits:
+              ephemeral-storage: "2Gi"
+              memory: "1Gi"
           livenessProbe:
             httpGet:
               path: /healthz

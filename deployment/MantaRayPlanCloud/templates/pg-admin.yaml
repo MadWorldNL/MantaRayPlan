@@ -74,6 +74,13 @@ spec:
         - name: {{ .Values.pgadmin.app }}
           image: "dpage/pgadmin4:latest"
           imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              memory: "500Mi"
+            limits:
+              ephemeral-storage: "2Gi"
+              memory: "1Gi"
           securityContext:
             runAsUser: 0
             runAsGroup: 0

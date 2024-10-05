@@ -91,6 +91,13 @@ spec:
         - name: {{ .Values.logging.seq.app }}
           image: "{{ .Values.logging.seq.image }}:{{ .Values.logging.seq.tag }}"
           imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              memory: "500Mi"
+            limits:
+              ephemeral-storage: "2Gi"
+              memory: "1Gi"
           env:
           - name: ACCEPT_EULA
             value: "Y"

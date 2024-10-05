@@ -59,6 +59,13 @@ spec:
         - name: {{ .Values.viewer.web.app }}
           image: "{{ .Values.viewer.web.image }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              memory: "500Mi"
+            limits:
+              ephemeral-storage: "2Gi"
+              memory: "1Gi"
           livenessProbe:
             httpGet:
               path: /healthz.txt
@@ -72,7 +79,7 @@ spec:
               mountPath: /etc/nginx/conf.d/default.conf
               subPath: default.conf
               readOnly: true
-            - name: "{{ .Values.admin.web.app }}-appsettings-config-volume"
+            Y- name: "{{ .Values.admin.web.app }}-appsettings-config-volume"
               mountPath: /usr/share/nginx/html/appsettings.json
               subPath: appsettings.json
               readOnly: true
