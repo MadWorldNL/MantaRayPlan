@@ -27,6 +27,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y android-sdk
+          export AndroidSdkDirectory=/usr/lib/android-sdk
         env:
           ANDROID_HOME: /usr/lib/android-sdk
           ANDROID_SDK_ROOT: /usr/lib/android-sdk
