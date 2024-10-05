@@ -45,7 +45,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           dotnet-sonarscanner begin /k:"MadWorldNL_MantaRayPlan" /o:"madworldnl" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"  /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs"  /d:sonar.exclusions="**/Clients.DefaultStyle/wwwroot/lib/**, **/Clients.DefaultStyle/wwwroot/app/**"
-          dotnet build -t:InstallAndroidDependencies -f net8.0-android -p:AcceptAndroidSdkLicenses=True
+          dotnet workload install android
           dotnet workload restore ./src/MadWorldNL.MantaRayPlan.sln; 
           dotnet restore ./src/MadWorldNL.MantaRayPlan.sln; 
           dotnet build ./src/MadWorldNL.MantaRayPlan.sln --no-restore -c Release;
