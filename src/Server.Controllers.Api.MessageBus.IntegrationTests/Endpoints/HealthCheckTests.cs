@@ -1,7 +1,5 @@
 using System.Net;
 using MadWorldNL.MantaRayPlan.Base;
-using MassTransit;
-using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 
 namespace MadWorldNL.MantaRayPlan.Endpoints;
