@@ -55,6 +55,6 @@ app.MapHealthChecks("/healthz");
 
 app.Services.MigrateDatabase<MantaRayPlanDbContext>();
 
-app.Run();
+await app.RunAsync();
 
 public abstract partial class Program;
