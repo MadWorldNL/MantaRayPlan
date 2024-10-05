@@ -43,7 +43,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"MadWorldNL_MantaRayPlan" /o:"madworldnl" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"  /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs"  /d:sonar.exclusions="**/Clients.DefaultStyle/wwwroot/lib/**, **/Clients.DefaultStyle/wwwroot/app/**"
           dotnet workload restore ./src/MadWorldNL.MantaRayPlan.sln; 
