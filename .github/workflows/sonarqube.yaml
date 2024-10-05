@@ -56,6 +56,6 @@ jobs:
           dotnet workload install android
           dotnet workload restore ./src/MadWorldNL.MantaRayPlan.sln; 
           dotnet restore ./src/MadWorldNL.MantaRayPlan.sln; 
-          dotnet build ./src/MadWorldNL.MantaRayPlan.sln --no-restore -c Release;
+          dotnet build ./src/MadWorldNL.MantaRayPlan.sln --no-restore -c Release /p:AndroidSdkDirectory="$(AndroidSdkDirectory)";
           dotnet test ./src/MadWorldNL.MantaRayPlan.sln --no-build --no-restore -c Release --blame-hang-timeout 5min --collect:"XPlat Code Coverage" --results-directory TestResults/ -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover;
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
