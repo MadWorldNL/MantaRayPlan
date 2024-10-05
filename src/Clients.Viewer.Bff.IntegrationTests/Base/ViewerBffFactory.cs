@@ -57,6 +57,5 @@ public class ViewerBffFactory : WebApplicationFactory<Program>, IAsyncLifetime
         }
         
         await base.DisposeAsync();
-        GC.SuppressFinalize(this);
     }
 }

@@ -24,9 +24,9 @@ public class MessageBusServiceProxy(
                 Counter = status.Message.Count,
             };
         }
-        catch (RequestFaultException exception) when (exception.Fault?.Exceptions.Any(ex =>
+        catch (RequestFaultException exception) when (Array.Exists(exception.Fault?.Exceptions ?? [], ex =>
                                                           ex.InnerException?.ExceptionType ==
-                                                          "Npgsql.NpgsqlException") ?? false)
+                                                          "Npgsql.NpgsqlException"))
         {
             logger.LogError(exception, "Unable to connect with database");
 

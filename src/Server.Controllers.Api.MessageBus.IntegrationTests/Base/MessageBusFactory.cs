@@ -81,6 +81,5 @@ public class MessageBusFactory : WebApplicationFactory<Program>, IAsyncLifetime
         }
         
         await base.DisposeAsync();
-        GC.SuppressFinalize(this);
     }
 }
