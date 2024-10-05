@@ -17,8 +17,9 @@ public class EventServiceProxy : EventService.EventServiceBase
         {
             Thread.Sleep(1000);
         }
-        
+
         EventPublisher.OnMessageReceived -= SendEventToClient;
+
         return Task.CompletedTask;
         
         void SendEventToClient(IEvent newEvent)

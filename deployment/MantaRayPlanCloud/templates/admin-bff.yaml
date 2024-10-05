@@ -39,7 +39,7 @@ spec:
             failureThreshold: 3
           env:
             - name: Api__Address
-              value: "{{ .Values.api.grpc.loadBalancer}}:8080"
+              value: "{{ .Values.api.grpc.loadBalancer }}:8080"
             - name: OpenTelemetry__LoggerEndpoint
               value: "{{ .Values.logging.seq.host.internal }}"
             - name: OpenTelemetry__LoggerApiKey

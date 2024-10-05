@@ -4,5 +4,5 @@ namespace MadWorldNL.MantaRayPlan.MassTransit;
 
 public static class EventPublisher
 {
-    public static Action<IEvent> OnMessageReceived { get; set; } = _ => { };
+    public static Action<IEvent>? OnMessageReceived { get; set; } = _ => { };
 }

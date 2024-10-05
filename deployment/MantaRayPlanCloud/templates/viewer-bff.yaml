@@ -25,7 +25,7 @@ spec:
           resources:
             requests:
               ephemeral-storage: "1Gi"
-              memory: "1Gi"
+              memory: "500Mi"
             limits:
               ephemeral-storage: "2Gi"
               memory: "1Gi"
@@ -39,7 +39,7 @@ spec:
             failureThreshold: 3
           env:
             - name: Api__Address
-              value: "{{ .Values.api.grpc.loadBalancer}}:8080"
+              value: "{{ .Values.api.grpc.loadBalancer }}:8080"
             - name: OpenTelemetry__LoggerEndpoint
               value: "{{ .Values.logging.seq.host.internal }}"
             - name: OpenTelemetry__LoggerApiKey
