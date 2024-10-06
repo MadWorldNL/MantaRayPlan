@@ -7,8 +7,6 @@ metadata:
     app: {{ .Values.api.grpc.app }}
     name: {{ .Values.api.grpc.name }}
 spec:
-  serviceAccountName: {{ .Values.serveraccount.name }}
-  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:
@@ -20,6 +18,8 @@ spec:
         app: {{ .Values.api.grpc.app }}
         task: {{ .Values.api.grpc.name }}
     spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
       containers:
         - name: {{ .Values.api.grpc.app }}
           image: "{{ .Values.api.grpc.image }}:{{ .Values.image.tag }}"

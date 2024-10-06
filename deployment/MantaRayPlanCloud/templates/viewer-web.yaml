@@ -44,8 +44,6 @@ metadata:
     app: {{ .Values.viewer.web.app }}
     name: {{ .Values.viewer.web.name }}
 spec:
-  serviceAccountName: {{ .Values.serveraccount.name }}
-  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:
@@ -57,6 +55,8 @@ spec:
         app: {{ .Values.viewer.web.app }}
         task: {{ .Values.viewer.web.name }}
     spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
       containers:
         - name: {{ .Values.viewer.web.app }}
           image: "{{ .Values.viewer.web.image }}:{{ .Values.image.tag }}"

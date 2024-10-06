@@ -7,8 +7,6 @@ metadata:
     app: {{ .Values.viewer.bff.app }}
     name: {{ .Values.viewer.bff.name }}
 spec:
-  serviceAccountName: {{ .Values.serveraccount.name }}
-  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:
@@ -20,6 +18,8 @@ spec:
         app: {{ .Values.viewer.bff.app }}
         task: {{ .Values.viewer.bff.name }}
     spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
       containers:
         - name: {{ .Values.viewer.bff.app }}
           image: "{{ .Values.viewer.bff.image }}:{{ .Values.image.tag }}"

@@ -44,8 +44,6 @@ metadata:
     app: {{ .Values.admin.web.app }}
     name: {{ .Values.admin.web.name }}
 spec:
-  serviceAccountName: {{ .Values.serveraccount.name }}
-  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:
@@ -57,6 +55,8 @@ spec:
         app: {{ .Values.admin.web.app }}
         task: {{ .Values.admin.web.name }}
     spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
       containers:
         - name: {{ .Values.admin.web.app }}
           image: "{{ .Values.admin.web.image }}:{{ .Values.image.tag }}"
