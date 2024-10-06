@@ -79,9 +79,11 @@ spec:
           resources:
             requests:
               ephemeral-storage: "1Gi"
+              cpu: 0.5
               memory: "500Mi"
             limits:
               ephemeral-storage: "2Gi"
+              cpu: 1
               memory: "1Gi"
           env:
           - name: RABBITMQ_DEFAULT_USER

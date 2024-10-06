@@ -59,8 +59,6 @@ metadata:
     app: {{ .Values.pgadmin.app }}
     name: {{ .Values.pgadmin.name }}
 spec:
-  serviceAccountName: {{ .Values.serveraccount.name }}
-  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:
@@ -72,6 +70,8 @@ spec:
         app: {{ .Values.pgadmin.app }}
         task: {{ .Values.pgadmin.name }}
     spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
       containers:
         - name: {{ .Values.pgadmin.app }}
           image: "dpage/pgadmin4:latest"
@@ -79,9 +79,11 @@ spec:
           resources:
             requests:
               ephemeral-storage: "1Gi"
+              cpu: 0.5
               memory: "500Mi"
             limits:
               ephemeral-storage: "2Gi"
+              cpu: 1
               memory: "1Gi"
           securityContext:
             runAsUser: 0
