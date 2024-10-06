@@ -19,9 +19,12 @@
     <ItemGroup>
       <ProjectReference Include="..\MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj" />
       <ProjectReference Include="..\Server.DataAccess.DataBase\DataBase.csproj" />
+      <ProjectReference Include="..\Server.Logic.Functions\Functions.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="MassTransit" />
+      <PackageReference Include="MassTransit.RabbitMQ" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

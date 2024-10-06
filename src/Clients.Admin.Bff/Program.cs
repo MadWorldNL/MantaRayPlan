@@ -1,23 +1,82 @@
 using System.Threading.RateLimiting;
-using MadWorldNL.MantaRayPlan;
+using MadWorldNL.MantaRayPlan.Api;
 using MadWorldNL.MantaRayPlan.Configurations;
+using MadWorldNL.MantaRayPlan.Endpoints;
+using MadWorldNL.MantaRayPlan.Events;
+using MadWorldNL.MantaRayPlan.Hubs;
+using MadWorldNL.MantaRayPlan.MassTransit;
 using MadWorldNL.MantaRayPlan.OpenTelemetry;
+using MassTransit;
 using Microsoft.AspNetCore.RateLimiting;
-using OpenTelemetry;
-using OpenTelemetry.Exporter;
-using OpenTelemetry.Logs;
+
+const string corsName = "DefaultCors";
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsName,
+        policy =>
+        {
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+            policy.AllowAnyOrigin();
+        });
+});
 
 var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Key).Get<OpenTelemetryConfig>() ??
                             new OpenTelemetryConfig();
 
 builder.AddDefaultOpenTelemetry(openTelemetryConfig);
 
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<EventHandlerService>();
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSignalRSwaggerGen();
+});
 
 builder.Services.AddHealthChecks();
+
+builder.Services.AddMassTransit(x =>
+{
+    x.SetKebabCaseEndpointNameFormatter();
+
+    x.AddConsumer<EventPusherConsumer<MessageBusStatusEvent>>();
+    
+    x.UsingRabbitMq((context,cfg) =>
+    {
+        var messageBusSettings  = builder.Configuration.GetSection(MessageBusSettings.Key).Get<MessageBusSettings>()!;
+        
+        cfg.Host(messageBusSettings.Host, messageBusSettings.Port, "/", h => {
+            h.Username(messageBusSettings.Username);
+            h.Password(messageBusSettings.Password);
+        });
+
+        var appName = typeof(Program).Assembly.GetName().Name!;
+        cfg.ReceiveEndpoint(EventPusherConsumer<MessageBusStatusEvent>.GetQueueName(appName, nameof(MessageBusStatusEvent)), 
+            e =>
+        {
+            e.ConfigureConsumer<EventPusherConsumer<MessageBusStatusEvent>>(context);
+        });
+        
+        cfg.ConfigureEndpoints(context);
+    });
+});
+
+var apiSettingsSection = builder.Configuration.GetSection(ApiSettings.Key);
+builder.Services.AddOptions<ApiSettings>()
+    .Bind(apiSettingsSection)
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+var apiSettings = apiSettingsSection.Get<ApiSettings>();
+
+builder.Services.AddGrpcClient<MessageBusService.MessageBusServiceClient>(options =>
+{
+    options.Address = new Uri(apiSettings!.Address);
+});
 
 builder.Services.AddRateLimiter(rl => rl
     .AddFixedWindowLimiter(policyName: RateLimiterConfig.DefaultName, options =>
@@ -30,6 +89,7 @@ builder.Services.AddRateLimiter(rl => rl
 
 var app = builder.Build();
 
+app.UseCors(corsName);
 app.UseRateLimiter();
 
 // Security Headers
@@ -48,30 +108,15 @@ app.Use(async (context, next) =>
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.MapHub<EventsHub>("/Events");
+
 app.MapHealthChecks("/healthz");
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", (ILogger<Program> logger) =>
-    {
-        logger.LogInformation("Retrieve weather forecast");
-        
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
+var defaultEndpoints = app.MapGroup("/")
     .WithOpenApi()
     .RequireRateLimiting(RateLimiterConfig.DefaultName);
+
+defaultEndpoints.AddMessageBusEndpoints();
 
 await app.RunAsync();
 

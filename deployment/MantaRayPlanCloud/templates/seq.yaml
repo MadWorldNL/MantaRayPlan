@@ -87,10 +87,21 @@ spec:
         app: {{ .Values.logging.seq.app }}
         task: {{ .Values.logging.seq.name }}
     spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
       containers:
         - name: {{ .Values.logging.seq.app }}
           image: "{{ .Values.logging.seq.image }}:{{ .Values.logging.seq.tag }}"
           imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              cpu: 0.5
+              memory: "500Mi"
+            limits:
+              ephemeral-storage: "2Gi"
+              cpu: 1
+              memory: "1Gi"
           env:
           - name: ACCEPT_EULA
             value: "Y"

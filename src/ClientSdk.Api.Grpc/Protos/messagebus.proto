@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "MadWorldNL.MantaRayPlan.Api";
+
+package messagebus;
+
+import "google/protobuf/empty.proto";
+
+service MessageBusService {
+  rpc GetStatus (google.protobuf.Empty) returns (GetMessageBusStatusReply);
+  rpc PostStatus (google.protobuf.Empty) returns (PostMessageBusStatusReply);
+}
+
+message GetMessageBusStatusReply {
+  string message = 1;
+  int32 counter = 2;
+}
+
+message PostMessageBusStatusReply {
+  string message = 1;
+}

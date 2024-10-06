@@ -18,10 +18,21 @@ spec:
         app: {{ .Values.api.grpc.app }}
         task: {{ .Values.api.grpc.name }}
     spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
       containers:
         - name: {{ .Values.api.grpc.app }}
           image: "{{ .Values.api.grpc.image }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              cpu: 0.5
+              memory: "500Mi"
+            limits:
+              ephemeral-storage: "2Gi"
+              cpu: 1
+              memory: "1Gi"
           livenessProbe:
             httpGet:
               path: /healthz
@@ -55,7 +66,19 @@ spec:
                   name: {{ .Values.logging.seq.secrets.name }}
                   key: apiKeyGrpc
             - name: Kestrel__EndpointDefaults__Protocols
-              value: "Http1AndHttp2"       
+              value: "Http1AndHttp2"
+            - name: MessageBus__Host
+              value: {{ .Values.messageBus.loadBalancer }}
+            - name: MessageBus__Username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.messageBus.secret.name }}
+                  key: username
+            - name: MessageBus__Password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.messageBus.secret.name }}
+                  key: password        
           ports:
             - containerPort: 8080
 ---

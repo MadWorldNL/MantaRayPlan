@@ -18,10 +18,21 @@ spec:
         app: {{ .Values.api.messageBus.app }}
         task: {{ .Values.api.messageBus.name }}
     spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
       containers:
         - name: {{ .Values.api.messageBus.app }}
           image: "{{ .Values.api.messageBus.image }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              cpu: 0.5
+              memory: "500Mi"
+            limits:
+              ephemeral-storage: "2Gi"
+              cpu: 1
+              memory: "1Gi"
           livenessProbe:
             httpGet:
               path: /healthz
@@ -56,5 +67,17 @@ spec:
                   key: apiKeyMessageBus     
             - name: Kestrel__EndpointDefaults__Protocols
               value: "Http1AndHttp2"
+            - name: MessageBus__Host
+              value: {{ .Values.messageBus.loadBalancer }}
+            - name: MessageBus__Username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.messageBus.secret.name }}
+                  key: username
+            - name: MessageBus__Password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.messageBus.secret.name }}
+                  key: password  
           ports:
             - containerPort: 8080

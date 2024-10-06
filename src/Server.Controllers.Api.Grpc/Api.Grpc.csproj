@@ -7,12 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\messagebus.proto" GrpcServices="Server"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" />
         <PackageReference Include="Grpc.AspNetCore.Server.Reflection" />
+        <PackageReference Include="MassTransit" />
+        <PackageReference Include="MassTransit.RabbitMQ" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -34,8 +32,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ClientSdk.Api.Grpc\ClientSdk.Api.Grpc.csproj" />
       <ProjectReference Include="..\MadWorldNL.AspNetCore\MadWorldNL.AspNetCore.csproj" />
       <ProjectReference Include="..\Server.DataAccess.DataBase\DataBase.csproj" />
+      <ProjectReference Include="..\Server.Logic.Functions\Functions.csproj" />
+      <ProjectReference Include="..\Server.Logic.Queries\Queries.csproj" />
     </ItemGroup>
 
 

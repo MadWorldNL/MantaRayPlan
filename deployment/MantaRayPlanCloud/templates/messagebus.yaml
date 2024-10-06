@@ -1,0 +1,128 @@
+{{- $messageBusSecrets := (lookup "v1" "Secret" .Values.namespace .Values.messageBus.secret.name ) -}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.messageBusSecrets.secret.name }}
+  namespace: {{ .Values.namespace }}
+type: kubernetes.io/basic-auth
+data:
+  username: {{ .Values.pgadmin.username | b64enc }}
+{{- if and $messageBusSecrets $messageBusSecrets.data }}
+  {{- if $messageBusSecrets.data.password }}
+  password: {{ $messageBusSecrets.data.password }}
+  {{- else }}
+  password: {{ "nonExistingKey1234" | b64enc }}
+  {{- end }}
+{{- else }}
+  password: {{ "nonExistingKey1234" | b64enc }}
+{{- end }}
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: rabbitmq-pv-volume
+  namespace: {{ .Values.namespace }}
+  labels:
+    type: local
+    app: {{ .Values.messageBus.app }}
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/MantaRayPlan/RabbitMQ"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: rabbitmq-pv-claim
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.messageBus.app }}
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.messageBus.deployment }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.messageBus.app }}
+    name: {{ .Values.messageBus.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.messageBus.app }}
+      task: {{ .Values.messageBus.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.messageBus.app }}
+        task: {{ .Values.messageBus.name }}
+    spec:
+      serviceAccountName: {{ .Values.serveraccount.name }}
+      automountServiceAccountToken: false
+      containers:
+        - name: {{ .Values.messageBus.app }}
+          image: "{{ .Values.messageBus.image }}:{{ .Values.messageBus.tag }}"
+          imagePullPolicy: Always
+          resources:
+            requests:
+              ephemeral-storage: "1Gi"
+              cpu: 0.5
+              memory: "500Mi"
+            limits:
+              ephemeral-storage: "2Gi"
+              cpu: 1
+              memory: "1Gi"
+          env:
+          - name: RABBITMQ_DEFAULT_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.messageBus.secret.name }}
+                key: username
+          - name: RABBITMQ_DEFAULT_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.messageBus.secret.name }}
+                key: password
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+          volumeMounts:
+            - mountPath: "/var/lib/rabbitmq"
+              name: rabbitmqvolume
+      volumes:
+        - name: rabbitmqvolume
+          persistentVolumeClaim:
+            claimName: rabbitmq-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.messageBus.loadBalancer }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: {{ .Values.messageBus.app }}
+    task: {{ .Values.messageBus.name }}
+  ports:
+    - protocol: TCP
+      name: http
+      port: 5672
+      targetPort: 5672
+    - protocol: TCP
+      name: http
+      port: 15672
+      targetPort: 15672
+  type: LoadBalancer

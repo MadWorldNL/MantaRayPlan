@@ -2,8 +2,16 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <AssemblyName>MadWorldNL.MantaRayPlan.Logic.Functions</AssemblyName>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MassTransit.Abstractions" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ClientSdk.Api.MessageBus\ClientSdk.Api.MessageBus.csproj" />
+      <ProjectReference Include="..\Server.Logic.Domain\Domain.csproj" />
+    </ItemGroup>
 
 </Project>
