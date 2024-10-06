@@ -7,6 +7,8 @@ metadata:
     app: {{ .Values.admin.bff.app }}
     name: {{ .Values.admin.bff.name }}
 spec:
+  serviceAccountName: {{ .Values.serveraccount.name }}
+  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:

@@ -44,6 +44,8 @@ metadata:
     app: {{ .Values.admin.web.app }}
     name: {{ .Values.admin.web.name }}
 spec:
+  serviceAccountName: {{ .Values.serveraccount.name }}
+  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:

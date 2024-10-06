@@ -59,6 +59,8 @@ metadata:
     app: {{ .Values.pgadmin.app }}
     name: {{ .Values.pgadmin.name }}
 spec:
+  serviceAccountName: {{ .Values.serveraccount.name }}
+  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:

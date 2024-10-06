@@ -7,6 +7,11 @@ public class EventPusherConsumer<TMessage> : IConsumer<TMessage> where TMessage 
 {
     public Task Consume(ConsumeContext<TMessage> context)
     {
+        if (EventPublisher.OnMessageReceived is null)
+        {
+            return Task.CompletedTask;
+        }
+        
         EventPublisher.OnMessageReceived(context.Message);
 
         return Task.CompletedTask;

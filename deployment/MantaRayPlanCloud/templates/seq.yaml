@@ -76,6 +76,8 @@ metadata:
     app: {{ .Values.logging.seq.app }}
     name: {{ .Values.logging.seq.name }}
 spec:
+  serviceAccountName: {{ .Values.serveraccount.name }}
+  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:

@@ -17,6 +17,9 @@ domain:
 ingress:
   name: "ingress"
 
+serveraccount:
+  name: manta-plan-account
+
 api:
   grpc:
     deployment: "api-grpc-deployment"

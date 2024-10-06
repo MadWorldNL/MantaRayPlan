@@ -59,6 +59,8 @@ metadata:
     app: {{ .Values.messageBus.app }}
     name: {{ .Values.messageBus.name }}
 spec:
+  serviceAccountName: {{ .Values.serveraccount.name }}
+  automountServiceAccountToken: false
   replicas: 1
   selector:
     matchLabels:
