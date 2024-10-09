@@ -13,7 +13,7 @@ namespace MadWorldNL.MantaRayPlan.Base;
 
 public class GrpcFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
-    public GrpcChannel Channel => _grpcChannel ??= CreateChannel();
+    public GrpcChannel Channel => _grpcChannel ??= CreateGrpcChannel();
     
     private const string DbName = "MantaRayPlan";
     private const string DbUser = "postgres";
@@ -46,7 +46,7 @@ public class GrpcFactory : WebApplicationFactory<Program>, IAsyncLifetime
         await _rabbitMqContainer.StartAsync();
     }
 
-    private GrpcChannel CreateChannel()
+    private GrpcChannel CreateGrpcChannel()
     {
         return GrpcChannel.ForAddress(Server.BaseAddress, new GrpcChannelOptions()
         {

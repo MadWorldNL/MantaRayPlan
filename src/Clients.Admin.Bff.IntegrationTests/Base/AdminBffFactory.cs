@@ -1,6 +1,8 @@
 using MassTransit;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Testcontainers.RabbitMq;
 
@@ -22,6 +24,26 @@ public class AdminBffFactory : WebApplicationFactory<Program>, IAsyncLifetime
             .Build();
         
         await _rabbitMqContainer.StartAsync();
+    }
+    
+    public IServiceScope GetServiceProvider()
+    {
+        return Services.GetService<IServiceScopeFactory>()!.CreateScope();
+    }
+
+    public async Task<HubConnection> CreateSignalRClientAsync<TReceiveType>(string hubName, string methodeName, Action<TReceiveType> handler)
+    {
+        var connection = new HubConnectionBuilder()
+            .WithUrl(
+                $"{Server.BaseAddress}{hubName}",
+                o => o.HttpMessageHandlerFactory = _ => Server.CreateHandler())
+            .Build();
+        
+        connection.On(methodeName, handler);
+        
+        await connection.StartAsync();
+
+        return connection;
     }
 
     protected override IHost CreateHost(IHostBuilder builder)

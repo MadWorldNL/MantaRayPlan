@@ -27,13 +27,9 @@ public class EventServiceProxyTests(GrpcFactory factory)
         });
 
         // Assert
-        while (await responses.ResponseStream.MoveNext(CancellationToken.None))
-        {
-            var @event = responses.ResponseStream.Current;
-            @event.Type.ShouldBe(nameof(MessageBusStatusEvent));
-            @event.Json.ShouldBe("{\"Count\":10}");
-            
-            break;
-        }
+        await responses.ResponseStream.MoveNext(CancellationToken.None);
+        var @event = responses.ResponseStream.Current;
+        @event.Type.ShouldBe(nameof(MessageBusStatusEvent));
+        @event.Json.ShouldBe("{\"Count\":10}");
     }
 }
