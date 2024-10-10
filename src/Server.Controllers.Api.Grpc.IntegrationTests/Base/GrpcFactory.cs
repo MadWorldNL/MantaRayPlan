@@ -1,5 +1,6 @@
 using Grpc.Net.Client;
 using MadWorldNL.MantaRayPlan.Extensions;
+using MadWorldNL.MantaRayPlan.MessageBuses;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
