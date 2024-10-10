@@ -5,7 +5,7 @@ using Shouldly;
 namespace MadWorldNL.MantaRayPlan.Endpoints;
 
 [Collection(TestDefinitions.Default)]
-public class HealthCheckTests(MessageBusFactory factory) : IAsyncLifetime
+public class HealthCheckTests(MessageBusFactory factory)
 {
     [Fact]
     public async Task Healthz_GivenEmptyRequest_ShouldBeHealthy()
@@ -19,8 +19,4 @@ public class HealthCheckTests(MessageBusFactory factory) : IAsyncLifetime
         // Assert
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
-
-    public Task InitializeAsync() => Task.CompletedTask;
-
-    public Task DisposeAsync() => factory.DisposeAsync();
 }

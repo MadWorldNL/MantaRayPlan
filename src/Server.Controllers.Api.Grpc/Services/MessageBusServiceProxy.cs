@@ -49,7 +49,7 @@ public class MessageBusServiceProxy(
     public override async Task<PostMessageBusStatusReply> PostStatus(Empty request, ServerCallContext context)
     {
         await sendEndpointProvider.Send(new MessageBusStatusCommand("Test"), context.CancellationToken);
-
+        
         return new PostMessageBusStatusReply();
     }
 }
