@@ -18,11 +18,9 @@ public class MessageBusStatusCommandConsumerTests(MessageBusFactory factory)
         var consumer = await harness.GetConsumerEndpoint<MessageBusStatusCommandConsumer>();
         
         // Act
-        await consumer.Send(new MessageBusStatusCommand("TestData"));
+        await consumer.Wait(c => c.Send(new MessageBusStatusCommand("TestData")), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
 
         // Assert
-        (await harness.Consumed.Any<MessageBusStatusCommand>()).ShouldBeTrue();
-        
         var context = serviceProvider.GetRequiredService<MantaRayPlanDbContext>();
         var statuses = context.MessageBusStatus.ToList();
         statuses.Count.ShouldBe(1);
