@@ -1,6 +1,8 @@
+using MadWorldNL.MantaRayPlan.MessageBuses;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Testcontainers.PostgreSql;
 using Testcontainers.RabbitMq;
@@ -36,6 +38,11 @@ public class MessageBusFactory : WebApplicationFactory<Program>, IAsyncLifetime
 
         await _postgreSqlContainer.StartAsync();
         await _rabbitMqContainer.StartAsync();
+    }
+    
+    public IServiceScope GetServiceProvider()
+    {
+        return Services.GetService<IServiceScopeFactory>()!.CreateScope();
     }
 
     protected override IHost CreateHost(IHostBuilder builder)

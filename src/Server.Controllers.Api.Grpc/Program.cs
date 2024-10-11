@@ -33,6 +33,7 @@ builder.AddDatabase();
 
 builder.Services.AddHealthChecks();
 
+EndpointConvention.Map<MessageBusStatusCommand>(new Uri(GetExchangeName<MessageBusStatusCommand>()));
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
@@ -62,8 +63,6 @@ builder.Services.AddMassTransit(x =>
             });
         
         cfg.ConfigureEndpoints(context);
-        
-       EndpointConvention.Map<MessageBusStatusCommand>(new Uri(GetExchangeName<MessageBusStatusCommand>()));
     });
 });
 
@@ -88,6 +87,6 @@ await app.RunAsync();
 
 public abstract partial class Program
 {
-    private static string GetExchangeName<T>() => $"exchange:{GetName<T>()}";
+    public static string GetExchangeName<T>() => $"exchange:{GetName<T>()}";
     private static string GetName<T>() => $"{typeof(T).Namespace}:{typeof(T).Name}";
 }
