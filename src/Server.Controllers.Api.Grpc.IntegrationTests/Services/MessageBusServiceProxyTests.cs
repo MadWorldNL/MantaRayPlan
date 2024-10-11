@@ -44,16 +44,14 @@ public class MessageBusServiceProxyTests(GrpcFactory factory)
         var messageBusClient = new MessageBusService.MessageBusServiceClient(factory.Channel);
         
         var serviceProvider = factory.GetServiceProvider().ServiceProvider;
-        var harness = serviceProvider.GetRequiredService<ITestHarness>();
-        await harness.Start();
         
         // Act
         var response = await messageBusClient.PostStatusAsync(new Empty());
 
         // Assert
-        // https://github.com/jbogard/Respawn
         response.Message.ShouldBe("");
         
+        var harness = serviceProvider.GetRequiredService<ITestHarness>();
         await harness.Sent.Any<MessageBusStatusCommand>();
     }
 }
