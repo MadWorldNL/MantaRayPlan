@@ -1,15 +1,20 @@
+using MadWorldNL.MantaRayPlan.Api;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using NSubstitute;
 using Testcontainers.RabbitMq;
 
 namespace MadWorldNL.MantaRayPlan.Base;
 
 public class AdminBffFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
+    public MessageBusService.MessageBusServiceClient MessageBusServiceClient = Substitute.For<MessageBusService.MessageBusServiceClient>();
+    
     private const string BusUser = "development";
     private const string BusPassword = "Password1234";
     
@@ -63,6 +68,9 @@ public class AdminBffFactory : WebApplicationFactory<Program>, IAsyncLifetime
 
         builder.ConfigureServices(services =>
         {
+            services.RemoveAll<MessageBusService.MessageBusServiceClient>();
+            services.AddScoped<MessageBusService.MessageBusServiceClient>(_ => MessageBusServiceClient);
+            
             // For more info about testing message bus:
             // https://masstransit.io/documentation/concepts/testing
             services.AddMassTransitTestHarness();
